@@ -75,10 +75,41 @@ nav > a {
     letter-spacing: -0.02em;
 }
 
-nav > div {
+.site-nav {
     display: flex;
     align-items: center;
     gap: 24px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.theme-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.theme-control select {
+    min-height: 34px;
+    padding: 0 28px 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.theme-control select:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(31, 94, 255, 0.12);
 }
 
 nav > div a {
@@ -180,9 +211,13 @@ footer {
         min-height: 64px;
     }
 
-    nav > div {
-        gap: 14px;
-    }
+    .site-nav {
+    gap: 14px;
+}
+
+.nav-links {
+    gap: 14px;
+}
 
     nav > div a {
         font-size: 0.85rem;
