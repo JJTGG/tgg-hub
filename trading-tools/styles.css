@@ -449,3 +449,26 @@ footer {
     color: var(--muted);
     font-size: 0.82rem;
 }
+
+@media (max-width: 620px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+    }
+
+    .site-nav {
+        width: 100%;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+    }
+
+    .theme-control {
+        margin-left: auto;
+    }
+}
