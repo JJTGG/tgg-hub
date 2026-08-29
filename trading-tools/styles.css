@@ -1,2 +1,202 @@
-/* TGG Trading Tools — Global Styles */
-/* Base styling will be implemented in the next build step. */
+/* =========================================================
+   TGG TRADING TOOLS
+   Global Styles — Foundation
+   ========================================================= */
+
+:root {
+    --bg: #ffffff;
+    --surface: #f6f7f9;
+    --text: #111318;
+    --muted: #626873;
+    --border: #e3e5e8;
+    --accent: #1f5eff;
+    --accent-hover: #174dcc;
+    --white: #ffffff;
+
+    --max-width: 1180px;
+    --radius: 14px;
+    --transition: 180ms ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+header {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+}
+
+nav {
+    width: min(100% - 32px, var(--max-width));
+    min-height: 72px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+nav > a {
+    font-size: 1.05rem;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+}
+
+nav > div {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+nav > div a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    transition:
+        color var(--transition),
+        opacity var(--transition);
+}
+
+nav > div a:hover {
+    color: var(--text);
+}
+
+main {
+    width: min(100% - 32px, var(--max-width));
+    margin: 0 auto;
+}
+
+main section:first-child {
+    padding: 110px 0 90px;
+    max-width: 780px;
+}
+
+main section:first-child > p:first-child {
+    margin-bottom: 16px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+h1 {
+    max-width: 760px;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
+}
+
+main section:first-child > p:nth-of-type(2) {
+    max-width: 650px;
+    margin-top: 24px;
+    color: var(--muted);
+    font-size: 1.08rem;
+}
+
+main section:first-child > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 32px;
+    padding: 13px 20px;
+
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--white);
+
+    font-weight: 700;
+    transition:
+        background var(--transition),
+        transform var(--transition);
+}
+
+main section:first-child > a:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+main section:nth-child(2) {
+    padding: 64px 0;
+    border-top: 1px solid var(--border);
+}
+
+main section:nth-child(2) h2 {
+    font-size: 2rem;
+    letter-spacing: -0.035em;
+}
+
+main section:nth-child(2) p {
+    max-width: 680px;
+    margin-top: 12px;
+    color: var(--muted);
+}
+
+footer {
+    width: min(100% - 32px, var(--max-width));
+    margin: 40px auto 0;
+    padding: 28px 0;
+
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+@media (max-width: 700px) {
+    nav {
+        min-height: 64px;
+    }
+
+    nav > div {
+        gap: 14px;
+    }
+
+    nav > div a {
+        font-size: 0.85rem;
+    }
+
+    main section:first-child {
+        padding: 76px 0 64px;
+    }
+
+    h1 {
+        font-size: clamp(2.35rem, 13vw, 4rem);
+    }
+
+    main section:first-child > p:nth-of-type(2) {
+        font-size: 1rem;
+    }
+}
