@@ -76,6 +76,18 @@
         <p>&copy; 2026 TGG HUB. All rights reserved.</p>
     </footer>
 
+    <script>
+    (() => {
+        const saved = localStorage.getItem("tgg-theme");
+
+        if (saved === "light" || saved === "dark" || saved === "system") {
+            document.documentElement.dataset.theme = saved;
+        } else {
+            document.documentElement.dataset.theme = "system";
+        }
+    })();
+</script>
+
     <script src="theme.js"></script>
     <script src="script.js"></script>
 </body>
