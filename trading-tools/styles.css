@@ -1,7 +1,3 @@
-/* =========================================================
-   TGG TRADING TOOLS
-   Global Styles — Foundation
-   ========================================================= */
 
 :root {
     --bg: #ffffff;
@@ -524,5 +520,127 @@ footer {
 
     .overview-item {
         min-height: 190px;
+    }
+}
+
+.hero {
+    min-height: min(720px, calc(100vh - 72px));
+    padding: 96px 0 72px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-copy {
+    max-width: 850px;
+}
+
+.eyebrow {
+    margin-bottom: 18px;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    max-width: 850px;
+    font-size: clamp(3rem, 8vw, 6.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.065em;
+}
+
+.hero-description {
+    max-width: 650px;
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: clamp(1rem, 2vw, 1.12rem);
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+}
+
+.button-primary,
+.button-secondary {
+    min-height: 46px;
+    padding: 0 18px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+    font-size: 0.92rem;
+    font-weight: 700;
+
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.button-primary {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.button-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.button-secondary {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+}
+
+.button-secondary:hover {
+    border-color: var(--text);
+    transform: translateY(-1px);
+}
+
+.hero-note {
+    width: 100%;
+    margin-top: 72px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+}
+
+.hero-note span {
+    color: var(--muted);
+    font-size: 0.78rem;
+}
+
+@media (max-width: 700px) {
+    .hero {
+        min-height: auto;
+        padding: 72px 0 56px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.8rem, 15vw, 5rem);
+    }
+
+    .hero-note {
+        margin-top: 56px;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .button-primary,
+    .button-secondary {
+        width: 100%;
     }
 }
