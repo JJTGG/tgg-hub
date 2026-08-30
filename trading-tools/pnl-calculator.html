@@ -79,9 +79,117 @@
                 <h2>Trade details</h2>
             </div>
 
-            <div id="pnl-calculator">
-                <!-- Calculator interface will be added next. -->
+            <div id="pnl-calculator" class="calculator">
+
+    <div class="calculator-form">
+
+        <div class="form-field">
+            <label for="pnl-direction">Position</label>
+
+            <select id="pnl-direction">
+                <option value="long">Long</option>
+                <option value="short">Short</option>
+            </select>
+        </div>
+
+        <div class="form-field">
+            <label for="pnl-entry">Entry Price</label>
+
+            <input
+                id="pnl-entry"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="any"
+                placeholder="e.g. 100"
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="pnl-exit">Exit Price</label>
+
+            <input
+                id="pnl-exit"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="any"
+                placeholder="e.g. 120"
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="pnl-size">Position Size</label>
+
+            <input
+                id="pnl-size"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="any"
+                placeholder="e.g. 10"
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="pnl-fees">Fees</label>
+
+            <input
+                id="pnl-fees"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="any"
+                value="0"
+                placeholder="Total fees"
+            >
+        </div>
+
+        <button type="button" id="calculate-pnl">
+            Calculate PnL
+        </button>
+
+    </div>
+
+    <div class="calculator-result" aria-live="polite">
+
+        <div class="result-header">
+            <span>Estimated Result</span>
+            <strong id="pnl-result">—</strong>
+        </div>
+
+        <div class="result-details">
+
+            <div>
+                <span>Price Difference</span>
+                <strong id="pnl-price-difference">—</strong>
             </div>
+
+            <div>
+                <span>Gross PnL</span>
+                <strong id="pnl-gross">—</strong>
+            </div>
+
+            <div>
+                <span>Fees</span>
+                <strong id="pnl-fees-result">—</strong>
+            </div>
+
+            <div>
+                <span>Net PnL</span>
+                <strong id="pnl-net">—</strong>
+            </div>
+
+            <div>
+                <span>Return</span>
+                <strong id="pnl-return">—</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
         </section>
 
