@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Calculate trading profit and loss with TGG Trading Tools."
+    >
+
+    <meta name="theme-color" content="#ffffff">
+
+    <title>PnL Calculator — TGG Trading Tools</title>
+
+    <script>
+        (() => {
+            const saved = localStorage.getItem("tgg-theme");
+
+            if (saved === "light" || saved === "dark" || saved === "system") {
+                document.documentElement.dataset.theme = saved;
+            } else {
+                document.documentElement.dataset.theme = "system";
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" aria-label="TGG Trading Tools home">
+                TGG Trading Tools
+            </a>
+
+            <div class="site-nav">
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="tools.html">Tools</a>
+                    <a href="guide.html">Guide</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="coming-soon.html">More</a>
+                </div>
+
+                <label class="theme-control">
+                    <span>Theme</span>
+
+                    <select id="theme-select" aria-label="Choose theme">
+                        <option value="system">Device</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </label>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="page-intro">
+            <p>Trading Calculator</p>
+
+            <h1>PnL Calculator</h1>
+
+            <p>
+                Estimate the potential profit or loss of a trade
+                using your entry price, exit price and position size.
+            </p>
+        </section>
+
+        <section class="calculator-section">
+
+            <div class="section-heading">
+                <p>Calculator</p>
+                <h2>Trade details</h2>
+            </div>
+
+            <div id="pnl-calculator">
+                <!-- Calculator interface will be added next. -->
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TGG HUB. All rights reserved.</p>
+    </footer>
+
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
