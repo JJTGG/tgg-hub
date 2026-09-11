@@ -6,10 +6,29 @@
 
   <meta
     name="description"
-    content="TGG HUB — an ecosystem for products, tools, and projects built under TGG."
+    content="TGG HUB — the ecosystem layer for products, tools, and projects built under TGG."
   >
-
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="TGG HUB">
   <meta name="theme-color" content="#080808">
+
+  <link rel="canonical" href="https://tgg-hub.vercel.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TGG HUB — Build. Launch. Evolve.">
+  <meta
+    property="og:description"
+    content="The ecosystem layer for products, tools, and projects built under TGG."
+  >
+  <meta property="og:url" content="https://tgg-hub.vercel.app/">
+  <meta property="og:site_name" content="TGG HUB">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TGG HUB — Build. Launch. Evolve.">
+  <meta
+    name="twitter:description"
+    content="The ecosystem layer for products, tools, and projects built under TGG."
+  >
 
   <title>TGG HUB — Build. Launch. Evolve.</title>
 
@@ -71,10 +90,6 @@
       margin: 0 auto;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
-
     header {
       position: sticky;
       top: 0;
@@ -131,10 +146,6 @@
 
       font-size: 1.4rem;
     }
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero {
       min-height: 78vh;
@@ -251,10 +262,6 @@
       transform: translateY(-2px);
     }
 
-    /* =========================
-       SECTIONS
-    ========================= */
-
     section {
       padding: 100px 0;
     }
@@ -286,10 +293,6 @@
     .section-heading p {
       color: var(--muted);
     }
-
-    /* =========================
-       ECOSYSTEM
-    ========================= */
 
     .ecosystem-grid {
       display: grid;
@@ -379,10 +382,6 @@
       font-size: 1.3rem;
     }
 
-    /* =========================
-       STATEMENT
-    ========================= */
-
     .statement {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -415,10 +414,6 @@
       margin-top: 18px;
     }
 
-    /* =========================
-       PRINCIPLES
-    ========================= */
-
     .principles {
       display: grid;
 
@@ -447,10 +442,6 @@
       font-size: 0.9rem;
     }
 
-    /* =========================
-       CTA
-    ========================= */
-
     .cta {
       padding: 120px 0;
 
@@ -476,10 +467,6 @@
       color: var(--muted);
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
-
     footer {
       padding: 28px 0;
 
@@ -499,10 +486,6 @@
       gap: 20px;
     }
 
-    /* =========================
-       ANIMATION
-    ========================= */
-
     .reveal {
       opacity: 0;
 
@@ -517,10 +500,6 @@
       opacity: 1;
       transform: none;
     }
-
-    /* =========================
-       MOBILE
-    ========================= */
 
     @media (max-width: 760px) {
 
@@ -593,10 +572,6 @@
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
-
   <header>
     <nav
       class="container"
@@ -638,12 +613,7 @@
     </nav>
   </header>
 
-
   <main>
-
-    <!-- =========================
-         HERO
-    ========================== -->
 
     <section class="hero">
 
@@ -686,11 +656,6 @@
 
     </section>
 
-
-    <!-- =========================
-         ECOSYSTEM
-    ========================== -->
-
     <section id="ecosystem">
 
       <div class="container">
@@ -714,10 +679,7 @@
 
         </div>
 
-
         <div class="ecosystem-grid">
-
-          <!-- Trading Tools -->
 
           <article class="card reveal">
 
@@ -753,9 +715,6 @@
 
           </article>
 
-
-          <!-- AI Arena -->
-
           <article class="card reveal">
 
             <div class="card-top">
@@ -790,9 +749,6 @@
 
           </article>
 
-
-          <!-- ClutchTopUp -->
-
           <article class="card reveal">
 
             <div class="card-top">
@@ -826,9 +782,6 @@
             </span>
 
           </article>
-
-
-          <!-- Future Projects -->
 
           <article class="card reveal">
 
@@ -870,11 +823,6 @@
 
     </section>
 
-
-    <!-- =========================
-         STATEMENT
-    ========================== -->
-
     <section class="statement">
 
       <div class="container statement-inner">
@@ -887,7 +835,6 @@
           </h2>
 
         </div>
-
 
         <div class="statement-copy reveal">
 
@@ -909,11 +856,6 @@
 
     </section>
 
-
-    <!-- =========================
-         PRINCIPLES
-    ========================== -->
-
     <section>
 
       <div class="container">
@@ -930,7 +872,6 @@
 
         </div>
 
-
         <div class="principles">
 
           <div class="principle reveal">
@@ -946,7 +887,6 @@
 
           </div>
 
-
           <div class="principle reveal">
 
             <strong>
@@ -960,7 +900,6 @@
             </p>
 
           </div>
-
 
           <div class="principle reveal">
 
@@ -980,11 +919,6 @@
       </div>
 
     </section>
-
-
-    <!-- =========================
-         CTA
-    ========================== -->
 
     <section class="cta">
 
@@ -1013,11 +947,6 @@
 
   </main>
 
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
   <footer>
 
     <div class="container footer-inner">
@@ -1034,21 +963,12 @@
 
   </footer>
 
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
   <script>
-
-    /* Mobile navigation */
-
     const toggle =
       document.querySelector(".nav-toggle");
 
     const links =
       document.querySelector(".nav-links");
-
 
     toggle.addEventListener("click", () => {
 
@@ -1062,9 +982,6 @@
 
     });
 
-
-    /* Close mobile menu after navigation */
-
     document
       .querySelectorAll(".nav-links a")
       .forEach(link => {
@@ -1077,14 +994,8 @@
 
       });
 
-
-    /* Dynamic year */
-
     document.getElementById("year").textContent =
       new Date().getFullYear();
-
-
-    /* Scroll reveal */
 
     const observer =
       new IntersectionObserver(
@@ -1110,7 +1021,6 @@
         }
       );
 
-
     document
       .querySelectorAll(".reveal")
       .forEach(element => {
@@ -1118,7 +1028,6 @@
         observer.observe(element);
 
       });
-
   </script>
 
 </body>
