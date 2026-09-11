@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Learn about TGG HUB — the ecosystem connecting independent products, tools, and ideas built under TGG."
+  >
+
+  <meta name="theme-color" content="#080808">
+
+  <title>About — TGG HUB</title>
+
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #101010;
+      --surface-2: #151515;
+      --border: #242424;
+      --text: #f5f5f5;
+      --soft: #c8c8c8;
+      --muted: #969696;
+      --max-width: 1180px;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(
+        var(--max-width),
+        calc(100% - 40px)
+      );
+      margin: 0 auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(8, 8, 8, 0.82);
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    nav {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-toggle {
+      display: none;
+
+      border: 0;
+      background: none;
+
+      color: var(--text);
+
+      cursor: pointer;
+
+      font-size: 1.4rem;
+    }
+
+    /* =========================
+       PAGE HERO
+    ========================= */
+
+    .page-hero {
+      padding: 120px 0 100px;
+    }
+
+    .eyebrow {
+      margin-bottom: 22px;
+
+      color: var(--muted);
+
+      font-size: 0.72rem;
+      font-weight: 700;
+
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .page-hero h1 {
+      max-width: 950px;
+
+      font-size: clamp(3rem, 7vw, 6.5rem);
+
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    /* =========================
+       INTRO
+    ========================= */
+
+    .intro {
+      padding: 20px 0 110px;
+    }
+
+    .intro-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1.4fr;
+
+      gap: 80px;
+    }
+
+    .intro-label {
+      color: var(--muted);
+
+      font-size: 0.72rem;
+      font-weight: 700;
+
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .intro-content {
+      color: var(--soft);
+
+      font-size: 1.1rem;
+    }
+
+    .intro-content p + p {
+      margin-top: 22px;
+    }
+
+    /* =========================
+       MISSION
+    ========================= */
+
+    .mission {
+      padding: 100px 0;
+
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mission-content {
+      max-width: 900px;
+    }
+
+    .mission-content h2 {
+      margin-bottom: 24px;
+
+      font-size: clamp(2.2rem, 5vw, 4rem);
+
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .mission-content p {
+      max-width: 720px;
+
+      color: var(--muted);
+
+      font-size: 1rem;
+    }
+
+    /* =========================
+       PRINCIPLES
+    ========================= */
+
+    .principles {
+      padding: 110px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 50px;
+    }
+
+    .section-heading span {
+      color: var(--muted);
+
+      font-size: 0.7rem;
+      font-weight: 700;
+
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      margin-top: 12px;
+
+      font-size: clamp(2rem, 5vw, 3.5rem);
+
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .principle-grid {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 16px;
+    }
+
+    .principle {
+      min-height: 260px;
+
+      padding: 30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--surface-2),
+          var(--surface)
+        );
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .principle:hover {
+      transform: translateY(-4px);
+      border-color: #383838;
+    }
+
+    .principle-number {
+      color: #5e5e5e;
+
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .principle h3 {
+      margin-bottom: 10px;
+
+      font-size: 1.45rem;
+      letter-spacing: -0.04em;
+    }
+
+    .principle p {
+      color: var(--muted);
+
+      font-size: 0.9rem;
+    }
+
+    /* =========================
+       FUTURE
+    ========================= */
+
+    .future {
+      padding: 110px 0;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .future-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1.5fr;
+
+      gap: 70px;
+    }
+
+    .future h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .future-copy {
+      color: var(--muted);
+
+      font-size: 1rem;
+    }
+
+    .future-copy p + p {
+      margin-top: 20px;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      padding: 120px 0;
+
+      text-align: center;
+    }
+
+    .cta h2 {
+      max-width: 800px;
+
+      margin: 0 auto 22px;
+
+      font-size: clamp(2.5rem, 6vw, 5rem);
+
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+    }
+
+    .cta p {
+      max-width: 560px;
+
+      margin: 0 auto 30px;
+
+      color: var(--muted);
+    }
+
+    .btn {
+      min-height: 48px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 22px;
+
+      border: 1px solid var(--text);
+      border-radius: 999px;
+
+      background: var(--text);
+      color: var(--bg);
+
+      font-size: 0.9rem;
+      font-weight: 700;
+
+      transition:
+        transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 28px 0;
+
+      border-top: 1px solid var(--border);
+
+      color: var(--muted);
+
+      font-size: 0.82rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    /* =========================
+       ANIMATION
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(18px);
+
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(
+          var(--max-width),
+          calc(100% - 28px)
+        );
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+
+        position: absolute;
+
+        top: 66px;
+        left: 14px;
+        right: 14px;
+
+        padding: 18px;
+
+        background: #101010;
+
+        border: 1px solid var(--border);
+        border-radius: 14px;
+
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .page-hero {
+        padding: 90px 0 70px;
+      }
+
+      .intro-grid,
+      .principle-grid,
+      .future-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-grid,
+      .future-grid {
+        gap: 30px;
+      }
+
+      .principle {
+        min-height: 220px;
+      }
+
+      .mission,
+      .principles,
+      .future {
+        padding: 76px 0;
+      }
+
+      .cta {
+        padding: 90px 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .principle,
+      .nav-links a {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header>
+
+    <nav
+      class="container"
+      aria-label="Primary navigation"
+    >
+
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="TGG HUB home"
+      >
+        TGG HUB
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <div class="nav-links">
+
+        <a href="ecosystem.html">
+          Ecosystem
+        </a>
+
+        <a
+          href="about.html"
+          class="active"
+        >
+          About
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         PAGE HERO
+    ========================== -->
+
+    <section class="page-hero">
+
+      <div class="container reveal">
+
+        <div class="eyebrow">
+          TGG HUB / About
+        </div>
+
+        <h1>
+          A home for what
+          we're building.
+        </h1>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         INTRO
+    ========================== -->
+
+    <section class="intro">
+
+      <div class="container intro-grid">
+
+        <div class="intro-label reveal">
+          The foundation
+        </div>
+
+        <div class="intro-content reveal">
+
+          <p>
+            TGG HUB is an ecosystem built around
+            independent products, tools, and ideas
+            developed under TGG.
+          </p>
+
+          <p>
+            Instead of treating every project as
+            another disconnected creation, TGG HUB
+            provides a shared home where they can
+            be discovered, understood, and eventually
+            connected.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         MISSION
+    ========================== -->
+
+    <section class="mission">
+
+      <div class="container">
+
+        <div class="mission-content reveal">
+
+          <h2>
+            Build things that
+            deserve to exist.
+          </h2>
+
+          <p>
+            TGG HUB is built around a simple idea:
+            meaningful products should be given room
+            to evolve. Some ideas may become tools.
+            Some may become platforms. Others may
+            become experiments that lead somewhere
+            completely unexpected.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PRINCIPLES
+    ========================== -->
+
+    <section class="principles">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <span>
+            01 / Principles
+          </span>
+
+          <h2>
+            How we build.
+          </h2>
+
+        </div>
+
+
+        <div class="principle-grid">
+
+          <article class="principle reveal">
+
+            <span class="principle-number">
+              01
+            </span>
+
+            <div>
+
+              <h3>
+                Independence
+              </h3>
+
+              <p>
+                Every project can maintain its own
+                identity, technology, audience, and
+                development path.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="principle reveal">
+
+            <span class="principle-number">
+              02
+            </span>
+
+            <div>
+
+              <h3>
+                Utility
+              </h3>
+
+              <p>
+                Building for the sake of building isn't
+                enough. Projects should create useful,
+                interesting, or meaningful experiences.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="principle reveal">
+
+            <span class="principle-number">
+              03
+            </span>
+
+            <div>
+
+              <h3>
+                Evolution
+              </h3>
+
+              <p>
+                Ideas change. Products improve. The
+                ecosystem is designed to grow with them.
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FUTURE
+    ========================== -->
+
+    <section class="future">
+
+      <div class="container future-grid">
+
+        <div class="reveal">
+
+          <h2>
+            The ecosystem
+            isn't finished.
+          </h2>
+
+        </div>
+
+
+        <div class="future-copy reveal">
+
+          <p>
+            TGG HUB is intentionally built to leave
+            room for new directions. As projects mature,
+            new products are created, and new ideas are
+            tested, the ecosystem can expand with them.
+          </p>
+
+          <p>
+            What exists today is only the beginning.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="cta">
+
+      <div class="container reveal">
+
+        <h2>
+          See what's
+          being built.
+        </h2>
+
+        <p>
+          Explore the projects currently forming
+          the TGG HUB ecosystem.
+        </p>
+
+        <a
+          class="btn"
+          href="ecosystem.html"
+        >
+          Explore ecosystem
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <span>
+        © <span id="year"></span> TGG HUB
+      </span>
+
+      <span>
+        Built under TGG.
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    /* Mobile navigation */
+
+    const navToggle =
+      document.querySelector(".nav-toggle");
+
+    const navLinks =
+      document.querySelector(".nav-links");
+
+
+    navToggle.addEventListener("click", () => {
+
+      const isOpen =
+        navLinks.classList.toggle("open");
+
+      navToggle.setAttribute(
+        "aria-expanded",
+        isOpen
+      );
+
+      navToggle.setAttribute(
+        "aria-label",
+        isOpen
+          ? "Close navigation menu"
+          : "Open navigation menu"
+      );
+
+    });
+
+
+    /* Close navigation after selection */
+
+    document
+      .querySelectorAll(".nav-links a")
+      .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+          navLinks.classList.remove("open");
+
+          navToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        });
+
+      });
+
+
+    /* Dynamic copyright year */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* Scroll reveal */
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach(element => {
+
+        observer.observe(element);
+
+      });
+
+  </script>
+
+</body>
+</html>
