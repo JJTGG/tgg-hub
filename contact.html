@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Get in touch with TGG HUB. Connect with the ecosystem, share an idea, or reach out about what we're building.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <title>Contact — TGG HUB</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: 0 auto;
+        }
+
+        /* NAVIGATION */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #1c1c1c;
+        }
+
+        nav {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #999;
+            font-size: 0.9rem;
+            transition: color 0.25s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 140px 0 110px;
+            border-bottom: 1px solid #1c1c1c;
+        }
+
+        .eyebrow {
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.98;
+            letter-spacing: -0.05em;
+            margin-bottom: 32px;
+        }
+
+        .hero p {
+            max-width: 680px;
+            color: #aaa;
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+        }
+
+        /* CONTACT */
+        .contact-section {
+            padding: 100px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.4fr;
+            gap: 80px;
+        }
+
+        .section-label {
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .contact-content h2 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+        }
+
+        .contact-content > p {
+            max-width: 650px;
+            color: #999;
+            font-size: 1.05rem;
+            margin-bottom: 45px;
+        }
+
+        /* CONTACT OPTIONS */
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .contact-card {
+            display: block;
+            padding: 30px;
+            border: 1px solid #222;
+            background: #0d0d0d;
+            transition:
+                border-color 0.25s ease,
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .contact-card:hover {
+            border-color: #444;
+            background: #111;
+            transform: translateY(-3px);
+        }
+
+        .contact-card span {
+            display: block;
+            color: #555;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            margin-bottom: 18px;
+        }
+
+        .contact-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-card p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* NOTE */
+        .note {
+            margin-top: 20px;
+            padding: 28px;
+            border-left: 2px solid #333;
+            background: #0d0d0d;
+        }
+
+        .note p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 35px 0;
+            border-top: 1px solid #1c1c1c;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-copy {
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+
+            .nav-links {
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                padding: 10px 5%;
+                background: #0a0a0a;
+                border-bottom: 1px solid #1c1c1c;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                width: 100%;
+                padding: 16px 0;
+                border-bottom: 1px solid #181818;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 100px 0 80px;
+            }
+
+            .contact-section {
+                padding: 75px 0;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .contact-options {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+
+                <a href="index.html" class="logo">
+                    TGG HUB
+                </a>
+
+                <button
+                    class="menu-toggle"
+                    aria-label="Toggle navigation"
+                    aria-expanded="false"
+                >
+                    ☰
+                </button>
+
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="ecosystem.html">Ecosystem</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html" class="active">Contact</a>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container reveal">
+
+                <div class="eyebrow">
+                    Contact TGG HUB
+                </div>
+
+                <h1>
+                    Have something to say?
+                </h1>
+
+                <p>
+                    Whether you want to connect, share an idea, discuss a
+                    project, or simply reach out — this is where the
+                    conversation starts.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact-section">
+
+            <div class="container contact-grid reveal">
+
+                <div>
+                    <div class="section-label">
+                        01 / Get in touch
+                    </div>
+                </div>
+
+                <div class="contact-content">
+
+                    <h2>
+                        Start a conversation.
+                    </h2>
+
+                    <p>
+                        TGG HUB is still evolving. As the ecosystem grows,
+                        more ways to connect with the individual projects
+                        and the wider ecosystem will become available.
+                    </p>
+
+                    <div class="contact-options">
+
+                        <!-- Replace the placeholder links when real
+                             contact channels are ready. -->
+
+                        <a href="#" class="contact-card">
+                            <span>General</span>
+                            <h3>General Enquiries</h3>
+                            <p>
+                                Questions, ideas, feedback, or anything
+                                related to TGG HUB.
+                            </p>
+                        </a>
+
+                        <a href="#" class="contact-card">
+                            <span>Projects</span>
+                            <h3>Project Discussions</h3>
+                            <p>
+                                Interested in one of the projects within
+                                the ecosystem?
+                            </p>
+                        </a>
+
+                    </div>
+
+                    <div class="note">
+                        <p>
+                            Contact channels are being established as the
+                            ecosystem develops. More direct communication
+                            options will be introduced when they're ready.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+
+            <div class="footer-inner">
+
+                <div class="footer-brand">
+                    TGG HUB
+                </div>
+
+                <div class="footer-copy">
+                    © 2026 TGG HUB. Built to evolve.
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        menuToggle.addEventListener("click", () => {
+
+            const isOpen = navLinks.classList.toggle("open");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+        });
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("open");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+            });
+
+        });
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+        const revealObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("visible");
+
+                            revealObserver.unobserve(
+                                entry.target
+                            );
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+    </script>
+
+</body>
+</html>
