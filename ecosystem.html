@@ -8,8 +8,27 @@
     name="description"
     content="Explore the TGG HUB ecosystem — independent products, tools, and projects built under TGG."
   >
-
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="TGG HUB">
   <meta name="theme-color" content="#080808">
+
+  <link rel="canonical" href="https://tgg-hub.vercel.app/ecosystem.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ecosystem — TGG HUB">
+  <meta
+    property="og:description"
+    content="Explore the TGG HUB ecosystem — independent products, tools, and projects built under TGG."
+  >
+  <meta property="og:url" content="https://tgg-hub.vercel.app/ecosystem.html">
+  <meta property="og:site_name" content="TGG HUB">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ecosystem — TGG HUB">
+  <meta
+    name="twitter:description"
+    content="Explore the TGG HUB ecosystem — independent products, tools, and projects built under TGG."
+  >
 
   <title>Ecosystem — TGG HUB</title>
 
@@ -67,10 +86,6 @@
       );
       margin: 0 auto;
     }
-
-    /* =========================
-       HEADER
-    ========================= */
 
     header {
       position: sticky;
@@ -132,10 +147,6 @@
       font-size: 1.4rem;
     }
 
-    /* =========================
-       PAGE HERO
-    ========================= */
-
     .page-hero {
       padding: 120px 0 90px;
       text-align: center;
@@ -171,10 +182,6 @@
 
       font-size: 1.05rem;
     }
-
-    /* =========================
-       PROJECT GRID
-    ========================= */
 
     .projects {
       padding: 20px 0 110px;
@@ -286,10 +293,6 @@
       font-weight: 600;
     }
 
-    /* =========================
-       ECOSYSTEM STATEMENT
-    ========================= */
-
     .statement {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -330,10 +333,6 @@
       font-size: 1rem;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
-
     footer {
       padding: 28px 0;
 
@@ -352,10 +351,6 @@
       gap: 20px;
     }
 
-    /* =========================
-       REVEAL ANIMATION
-    ========================= */
-
     .reveal {
       opacity: 0;
 
@@ -370,10 +365,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* =========================
-       MOBILE
-    ========================= */
 
     @media (max-width: 760px) {
 
@@ -438,10 +429,6 @@
       }
     }
 
-    /* =========================
-       REDUCED MOTION
-    ========================= */
-
     @media (prefers-reduced-motion: reduce) {
 
       html {
@@ -463,10 +450,6 @@
 </head>
 
 <body>
-
-  <!-- =========================
-       NAVIGATION
-  ========================= -->
 
   <header>
 
@@ -512,12 +495,7 @@
 
   </header>
 
-
   <main>
-
-    <!-- =========================
-         PAGE INTRO
-    ========================= -->
 
     <section class="page-hero">
 
@@ -541,18 +519,11 @@
 
     </section>
 
-
-    <!-- =========================
-         PROJECTS
-    ========================= -->
-
     <section class="projects">
 
       <div class="container">
 
         <div class="project-grid">
-
-          <!-- Trading Tools -->
 
           <article class="project-card reveal">
 
@@ -588,9 +559,6 @@
 
           </article>
 
-
-          <!-- AI Arena -->
-
           <article class="project-card reveal">
 
             <div class="project-header">
@@ -625,9 +593,6 @@
 
           </article>
 
-
-          <!-- ClutchTopUp -->
-
           <article class="project-card reveal">
 
             <div class="project-header">
@@ -661,9 +626,6 @@
             </div>
 
           </article>
-
-
-          <!-- Future Projects -->
 
           <article class="project-card reveal">
 
@@ -705,11 +667,6 @@
 
     </section>
 
-
-    <!-- =========================
-         STATEMENT
-    ========================= -->
-
     <section class="statement">
 
       <div class="container">
@@ -740,11 +697,6 @@
 
   </main>
 
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
   <footer>
 
     <div class="container footer-inner">
@@ -761,19 +713,12 @@
 
   </footer>
 
-
   <script>
-
-    /* =========================
-       MOBILE NAVIGATION
-    ========================= */
-
     const navToggle =
       document.querySelector(".nav-toggle");
 
     const navLinks =
       document.querySelector(".nav-links");
-
 
     navToggle.addEventListener("click", () => {
 
@@ -794,9 +739,6 @@
 
     });
 
-
-    /* Close menu after navigation */
-
     document
       .querySelectorAll(".nav-links a")
       .forEach(link => {
@@ -814,18 +756,8 @@
 
       });
 
-
-    /* =========================
-       DYNAMIC YEAR
-    ========================= */
-
     document.getElementById("year").textContent =
       new Date().getFullYear();
-
-
-    /* =========================
-       SCROLL REVEAL
-    ========================= */
 
     const revealObserver =
       new IntersectionObserver(
@@ -853,7 +785,6 @@
         }
       );
 
-
     document
       .querySelectorAll(".reveal")
       .forEach(element => {
@@ -861,7 +792,6 @@
         revealObserver.observe(element);
 
       });
-
   </script>
 
 </body>
