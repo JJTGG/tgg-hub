@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>404 — TGG HUB</title>
+  <meta
+    name="description"
+    content="The page you're looking for could not be found."
+  >
+  <meta name="robots" content="noindex">
+
+  <link rel="stylesheet" href="styles/main.css">
+
+  <style>
+    main {
+      min-height: calc(100vh - var(--header-height));
+      display: flex;
+      align-items: center;
+    }
+
+    .error {
+      width: 100%;
+      padding: 100px 0;
+    }
+
+    .error-code {
+      color: #555;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .error h1 {
+      max-width: 900px;
+      margin-top: 18px;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.85;
+      letter-spacing: -0.08em;
+    }
+
+    .error p {
+      max-width: 500px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .error .btn {
+      margin-top: 32px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- include:header -->
+
+  <main>
+    <section class="error">
+      <div class="container">
+        <div class="reveal">
+          <span class="error-code">404 — Page not found</span>
+
+          <h1>Lost.</h1>
+
+          <p>
+            The page you're looking for doesn't exist or may have moved.
+          </p>
+
+          <a href="/" class="btn btn-primary">Back to TGG HUB</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- include:footer -->
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
