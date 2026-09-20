@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact — TGG HUB</title>
+  <meta
+    name="description"
+    content="Get in touch with TGG HUB."
+  >
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="TGG HUB">
+  <meta name="theme-color" content="#080808">
+
+  <link rel="canonical" href="https://tgg-hub.vercel.app/contact.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact — TGG HUB">
+  <meta
+    property="og:description"
+    content="Get in touch with TGG HUB."
+  >
+  <meta property="og:url" content="https://tgg-hub.vercel.app/contact.html">
+  <meta property="og:site_name" content="TGG HUB">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Contact — TGG HUB">
+  <meta
+    name="twitter:description"
+    content="Get in touch with TGG HUB."
+  >
+
+  <link rel="stylesheet" href="styles/main.css">
+
+  <style>
+    .page-hero {
+      padding: 120px 0 90px;
+    }
+
+    .page-label {
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .page-hero h1 {
+      max-width: 900px;
+      margin-top: 18px;
+      font-size: clamp(3.4rem, 8vw, 7rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+    }
+
+    .page-hero p {
+      max-width: 650px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .contact-section {
+      padding: 30px 0 120px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .contact-card {
+      min-height: 260px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      border-color: #383838;
+    }
+
+    .contact-number {
+      color: #555;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .contact-card h2 {
+      margin-top: 55px;
+      font-size: 1.5rem;
+      letter-spacing: -0.04em;
+    }
+
+    .contact-card p {
+      max-width: 480px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-card .status {
+      align-self: flex-start;
+      margin-top: 30px;
+    }
+
+    .contact-note {
+      max-width: 700px;
+      margin-top: 80px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-note p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .page-hero {
+        padding: 90px 0 70px;
+      }
+
+      .page-hero h1 {
+        font-size: clamp(3.4rem, 17vw, 5rem);
+      }
+
+      .contact-section {
+        padding-bottom: 90px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        min-height: 230px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- include:header -->
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="reveal">
+          <div class="page-label">Contact</div>
+
+          <h1>Let's build something.</h1>
+
+          <p>
+            TGG HUB is still evolving. As the ecosystem grows, this page will
+            become the place for relevant ways to connect.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <div>
+              <span class="contact-number">01</span>
+
+              <h2>General</h2>
+
+              <p>
+                General contact information will be made available here when
+                the appropriate channel is established.
+              </p>
+            </div>
+
+            <span class="status">Coming Soon</span>
+          </article>
+
+          <article class="contact-card reveal">
+            <div>
+              <span class="contact-number">02</span>
+
+              <h2>Partnerships</h2>
+
+              <p>
+                Partnership and collaboration enquiries will have a dedicated
+                channel as the ecosystem develops.
+              </p>
+            </div>
+
+            <span class="status">Coming Soon</span>
+          </article>
+        </div>
+
+        <div class="contact-note reveal">
+          <p>
+            No placeholder contact links are being published. When a channel
+            is ready, it will be connected here directly.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- include:footer -->
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
