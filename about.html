@@ -1,638 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn how TGG HUB evolved from a Web3 community into an ecosystem for independent products, tools, and projects built under TGG.">
-    <meta name="author" content="TGG HUB">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0a0a0a">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="canonical" href="https://tgg-hub.vercel.app/about.html">
+  <title>About — TGG HUB</title>
+  <meta
+    name="description"
+    content="Learn how TGG HUB evolved from a Web3 community into an ecosystem for independent products, tools, and projects built under TGG."
+  >
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="TGG HUB">
+  <meta name="theme-color" content="#080808">
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="About — TGG HUB">
-    <meta property="og:description" content="Learn how TGG HUB evolved from a Web3 community into an ecosystem for independent products, tools, and projects built under TGG.">
-    <meta property="og:url" content="https://tgg-hub.vercel.app/about.html">
-    <meta property="og:site_name" content="TGG HUB">
+  <link rel="canonical" href="https://tgg-hub.vercel.app/about.html">
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="About — TGG HUB">
-    <meta name="twitter:description" content="Learn how TGG HUB evolved from a Web3 community into an ecosystem for independent products, tools, and projects built under TGG.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About — TGG HUB">
+  <meta
+    property="og:description"
+    content="Learn how TGG HUB evolved from a Web3 community into an ecosystem for independent products, tools, and projects built under TGG."
+  >
+  <meta property="og:url" content="https://tgg-hub.vercel.app/about.html">
+  <meta property="og:site_name" content="TGG HUB">
 
-    <title>About — TGG HUB</title>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="About — TGG HUB">
+  <meta
+    name="twitter:description"
+    content="Learn how TGG HUB evolved from a Web3 community into an ecosystem for independent products, tools, and projects built under TGG."
+  >
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link rel="stylesheet" href="styles/main.css">
 
-        html {
-            scroll-behavior: smooth;
-        }
+  <style>
+    .page-hero {
+      padding: 120px 0 100px;
+    }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0a0a0a;
-            color: #f5f5f5;
-            line-height: 1.6;
-        }
+    .page-label {
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    .page-hero h1 {
+      max-width: 1000px;
+      margin-top: 18px;
+      font-size: clamp(3.4rem, 8vw, 7rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+    }
 
-        .container {
-            width: min(1100px, 90%);
-            margin: 0 auto;
-        }
+    .page-hero p {
+      max-width: 700px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.88);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #1c1c1c;
-        }
+    .about-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
 
-        nav {
-            min-height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    .section-index {
+      color: #555;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
 
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-        }
+    .section-layout {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 70px;
+    }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
+    .section-heading h2 {
+      max-width: 500px;
+      margin-top: 18px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
 
-        .nav-links a {
-            color: #999;
-            font-size: 0.9rem;
-            transition: color 0.25s ease;
-        }
+    .section-content {
+      max-width: 650px;
+    }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #fff;
-        }
+    .section-content p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+    .section-content p + p {
+      margin-top: 20px;
+    }
 
-        .hero {
-            padding: 140px 0 110px;
-            border-bottom: 1px solid #1c1c1c;
-        }
+    .ecosystem-model {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 55px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
 
-        .eyebrow {
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.75rem;
-            margin-bottom: 20px;
-        }
+    .model-card {
+      min-height: 230px;
+      padding: 28px;
+      background: var(--surface);
+    }
 
-        .hero h1 {
-            max-width: 850px;
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 0.98;
-            letter-spacing: -0.05em;
-            margin-bottom: 32px;
-        }
+    .model-number {
+      color: #555;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
 
-        .hero p {
-            max-width: 720px;
-            color: #aaa;
-            font-size: clamp(1.05rem, 2vw, 1.3rem);
-        }
+    .model-card h3 {
+      margin-top: 55px;
+      font-size: 1.15rem;
+      letter-spacing: -0.025em;
+    }
 
-        section {
-            padding: 100px 0;
-            border-bottom: 1px solid #1c1c1c;
-        }
+    .model-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
 
-        .section-grid {
-            display: grid;
-            grid-template-columns: 0.8fr 1.4fr;
-            gap: 80px;
-        }
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 55px;
+    }
 
-        .section-label {
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            font-size: 0.72rem;
-            font-weight: 700;
-        }
+    .principle {
+      padding: 30px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
 
-        .section-content h2 {
-            font-size: clamp(2rem, 5vw, 3.4rem);
-            line-height: 1.05;
-            letter-spacing: -0.04em;
-            margin-bottom: 28px;
-        }
+    .principle-number {
+      color: #555;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
 
-        .section-content p {
-            color: #999;
-            font-size: 1.05rem;
-            max-width: 720px;
-            margin-bottom: 20px;
-        }
+    .principle h3 {
+      margin-top: 45px;
+      font-size: 1.2rem;
+    }
 
-        .ecosystem-model {
-            margin-top: 60px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border: 1px solid #222;
-        }
+    .principle p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
 
-        .model-card {
-            padding: 32px;
-            min-height: 190px;
-            border-right: 1px solid #222;
-        }
+    .future {
+      padding: 120px 0;
+      text-align: center;
+    }
 
-        .model-card:last-child {
-            border-right: none;
-        }
+    .future h2 {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+    }
 
-        .model-number {
-            color: #555;
-            font-size: 0.8rem;
-            margin-bottom: 30px;
-        }
+    .future p {
+      max-width: 600px;
+      margin: 25px auto 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
 
-        .model-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 10px;
-        }
+    @media (max-width: 800px) {
+      .page-hero {
+        padding: 90px 0 75px;
+      }
 
-        .model-card p {
-            color: #777;
-            font-size: 0.9rem;
-        }
+      .page-hero h1 {
+        font-size: clamp(3.4rem, 17vw, 5rem);
+      }
 
-        .principles {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 50px;
-        }
+      .about-section {
+        padding: 75px 0;
+      }
 
-        .principle {
-            padding: 35px;
-            border: 1px solid #222;
-            background: #0d0d0d;
-        }
+      .section-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
 
-        .principle h3 {
-            margin-bottom: 14px;
-            font-size: 1.2rem;
-        }
+      .ecosystem-model,
+      .principles {
+        grid-template-columns: 1fr;
+      }
 
-        .principle p {
-            color: #888;
-            font-size: 0.92rem;
-        }
+      .model-card {
+        min-height: 190px;
+      }
 
-        .future {
-            text-align: center;
-        }
+      .model-card h3,
+      .principle h3 {
+        margin-top: 30px;
+      }
 
-        .future h2 {
-            max-width: 800px;
-            margin: 0 auto 25px;
-            font-size: clamp(2.3rem, 6vw, 4.5rem);
-            line-height: 1;
-            letter-spacing: -0.05em;
-        }
-
-        .future p {
-            max-width: 650px;
-            margin: 0 auto;
-            color: #999;
-            font-size: 1.05rem;
-        }
-
-        footer {
-            padding: 35px 0;
-        }
-
-        .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .footer-brand {
-            font-weight: 800;
-            letter-spacing: 0.08em;
-        }
-
-        .footer-copy {
-            color: #555;
-            font-size: 0.8rem;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 800px) {
-            .nav-links {
-                position: absolute;
-                top: 72px;
-                left: 0;
-                right: 0;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0;
-                padding: 10px 5%;
-                background: #0a0a0a;
-                border-bottom: 1px solid #1c1c1c;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links a {
-                width: 100%;
-                padding: 16px 0;
-                border-bottom: 1px solid #181818;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero {
-                padding: 100px 0 80px;
-            }
-
-            section {
-                padding: 75px 0;
-            }
-
-            .section-grid {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .ecosystem-model,
-            .principles {
-                grid-template-columns: 1fr;
-            }
-
-            .model-card {
-                border-right: none;
-                border-bottom: 1px solid #222;
-            }
-
-            .model-card:last-child {
-                border-bottom: none;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
-    </style>
+      .future {
+        padding: 90px 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="brand">TGG HUB</a>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">TGG HUB</a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
 
-                <button class="menu-toggle" aria-label="Toggle navigation">
-                    ≡
-                </button>
-
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="ecosystem.html">Ecosystem</a>
-                    <a href="about.html" class="active">About</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </nav>
+        <div class="nav-links">
+          <a href="ecosystem.html">Ecosystem</a>
+          <a href="about.html" class="active">About</a>
+          <a href="contact.html">Contact</a>
         </div>
-    </header>
+      </nav>
+    </div>
+  </header>
 
-    <main>
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="reveal">
+          <div class="page-label">About TGG HUB</div>
 
-        <section class="hero">
-            <div class="container reveal">
-                <div class="eyebrow">About TGG HUB</div>
+          <h1>From community.<br>Into an ecosystem.</h1>
 
-                <h1>
-                    From community.<br>
-                    Into an ecosystem.
-                </h1>
-
-                <p>
-                    TGG HUB began as a Web3 community built around learning,
-                    personal growth, and genuine connections. It has evolved
-                    into the ecosystem layer connecting the products, tools,
-                    and projects being built under TGG.
-                </p>
-            </div>
-        </section>
-
-        <section>
-            <div class="container section-grid reveal">
-
-                <div>
-                    <div class="section-label">01 / Where it started</div>
-                </div>
-
-                <div class="section-content">
-                    <h2>
-                        The idea was always bigger than a website.
-                    </h2>
-
-                    <p>
-                        TGG HUB started as a place for Web3 enthusiasts,
-                        learners, and builders to connect, share knowledge,
-                        and grow together.
-                    </p>
-
-                    <p>
-                        The early ecosystem brought together people with
-                        different interests and skills across Web3 — from
-                        community management and content to research,
-                        development, trading, and blockchain education.
-                    </p>
-
-                    <p>
-                        That foundation shaped what TGG HUB became next.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <div class="container section-grid reveal">
-
-                <div>
-                    <div class="section-label">02 / Where it is now</div>
-                </div>
-
-                <div class="section-content">
-                    <h2>
-                        Built around things, not just people.
-                    </h2>
-
-                    <p>
-                        TGG HUB has evolved from a community-centered Web3
-                        hub into a home for independently built products,
-                        tools, and ideas.
-                    </p>
-
-                    <p>
-                        The projects connected to TGG HUB are not meant to
-                        become copies of one another or pieces of one giant
-                        application. Each has its own identity, purpose,
-                        technology, and direction.
-                    </p>
-
-                    <p>
-                        TGG HUB provides the layer that connects them without
-                        absorbing what makes each project distinct.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <div class="container reveal">
-
-                <div class="section-grid">
-                    <div>
-                        <div class="section-label">03 / The Model</div>
-                    </div>
-
-                    <div class="section-content">
-                        <h2>
-                            Independent by design.
-                        </h2>
-
-                        <p>
-                            A project does not need to lose its identity
-                            simply because it belongs to a larger ecosystem.
-                        </p>
-
-                        <p>
-                            Products under TGG HUB can have their own
-                            repositories, domains, interfaces, technologies,
-                            and development lifecycles.
-                        </p>
-
-                        <p>
-                            TGG HUB sits above that structure — connecting
-                            the ecosystem without absorbing the products
-                            themselves.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="ecosystem-model">
-
-                    <div class="model-card">
-                        <div class="model-number">01</div>
-                        <h3>Independent Products</h3>
-                        <p>
-                            Each project is built around its own purpose
-                            and audience.
-                        </p>
-                    </div>
-
-                    <div class="model-card">
-                        <div class="model-number">02</div>
-                        <h3>Shared Direction</h3>
-                        <p>
-                            Projects can exist independently while still
-                            contributing to a larger ecosystem.
-                        </p>
-                    </div>
-
-                    <div class="model-card">
-                        <div class="model-number">03</div>
-                        <h3>TGG HUB</h3>
-                        <p>
-                            The ecosystem layer that brings the pieces
-                            together.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <div class="container reveal">
-
-                <div class="section-grid">
-                    <div>
-                        <div class="section-label">04 / Principles</div>
-                    </div>
-
-                    <div class="section-content">
-                        <h2>
-                            Built around a few simple ideas.
-                        </h2>
-
-                        <p>
-                            The ecosystem can grow without sacrificing the
-                            independence of the things inside it.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="principles">
-
-                    <div class="principle">
-                        <h3>Independence</h3>
-                        <p>
-                            Every product should have the freedom to evolve
-                            according to its own purpose.
-                        </p>
-                    </div>
-
-                    <div class="principle">
-                        <h3>Utility</h3>
-                        <p>
-                            Projects should solve real problems, provide
-                            meaningful value, or create useful experiences.
-                        </p>
-                    </div>
-
-                    <div class="principle">
-                        <h3>Evolution</h3>
-                        <p>
-                            TGG HUB is designed to grow as new ideas,
-                            products, and opportunities emerge.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <section class="future">
-            <div class="container reveal">
-
-                <div class="eyebrow">05 / What's ahead</div>
-
-                <h2>
-                    The next chapter is still being built.
-                </h2>
-
-                <p>
-                    TGG HUB will evolve alongside the products connected
-                    to it. As they mature, new connections, experiences,
-                    and possibilities can be introduced without changing
-                    what makes each project independent.
-                </p>
-
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-brand">TGG HUB</div>
-
-                <div class="footer-copy">
-                    © 2026 TGG HUB. Built to evolve.
-                </div>
-            </div>
+          <p>
+            TGG HUB began as a Web3 community built around learning, personal
+            growth, and genuine connections. It has evolved into the ecosystem
+            layer connecting the products, tools, and projects being built
+            under TGG.
+          </p>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        const menuToggle = document.querySelector(".menu-toggle");
-        const navLinks = document.querySelector(".nav-links");
+    <section class="about-section">
+      <div class="container">
+        <div class="section-layout">
+          <div class="section-heading reveal">
+            <span class="section-index">01</span>
+            <h2>Where it started.</h2>
+          </div>
 
-        menuToggle.addEventListener("click", () => {
-            navLinks.classList.toggle("open");
-        });
+          <div class="section-content reveal">
+            <p>
+              The idea was always bigger than a website.
+            </p>
 
-        document.querySelectorAll(".nav-links a").forEach(link => {
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("open");
-            });
-        });
+            <p>
+              TGG HUB started as a place for Web3 enthusiasts, learners, and
+              builders to connect, learn, and grow. The early ecosystem brought
+              together community management, content, research, development,
+              trading, and blockchain education.
+            </p>
 
-        const revealElements = document.querySelectorAll(".reveal");
+            <p>
+              That foundation shaped what TGG HUB became next.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        const revealObserver = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            },
-            {
-                threshold: 0.12
-            }
-        );
+    <section class="about-section">
+      <div class="container">
+        <div class="section-layout">
+          <div class="section-heading reveal">
+            <span class="section-index">02</span>
+            <h2>Where it is now.</h2>
+          </div>
 
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
-    </script>
+          <div class="section-content reveal">
+            <p>
+              Built around things, not just people.
+            </p>
 
+            <p>
+              TGG HUB is evolving into a home for independently built products,
+              tools, and ideas. Each project keeps its own identity, purpose,
+              technology, and direction.
+            </p>
+
+            <p>
+              TGG HUB connects them without absorbing them.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="section-layout">
+          <div class="section-heading reveal">
+            <span class="section-index">03</span>
+            <h2>The Model.</h2>
+          </div>
+
+          <div class="section-content reveal">
+            <p>
+              Independent by design.
+            </p>
+
+            <p>
+              Products within the ecosystem can have their own repositories,
+              domains, interfaces, technologies, and lifecycles. There is no
+              requirement for everything to become one application or one
+              codebase.
+            </p>
+
+            <p>
+              TGG HUB sits above that structure as the layer that brings the
+              ecosystem together.
+            </p>
+          </div>
+        </div>
+
+        <div class="ecosystem-model">
+          <article class="model-card reveal">
+            <span class="model-number">01</span>
+            <h3>Independent Products</h3>
+            <p>
+              Each product remains responsible for its own identity,
+              technology, and direction.
+            </p>
+          </article>
+
+          <article class="model-card reveal">
+            <span class="model-number">02</span>
+            <h3>Shared Direction</h3>
+            <p>
+              The products exist independently while sharing a broader
+              ecosystem.
+            </p>
+          </article>
+
+          <article class="model-card reveal">
+            <span class="model-number">03</span>
+            <h3>TGG HUB</h3>
+            <p>
+              The ecosystem layer connecting what is being built without
+              flattening it into one product.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="section-layout">
+          <div class="section-heading reveal">
+            <span class="section-index">04</span>
+            <h2>Principles.</h2>
+          </div>
+
+          <div class="section-content reveal">
+            <p>
+              The ecosystem is built around a few simple ideas.
+            </p>
+          </div>
+        </div>
+
+        <div class="principles">
+          <article class="principle reveal">
+            <span class="principle-number">01</span>
+            <h3>Independence</h3>
+            <p>
+              Products should be able to grow according to their own needs
+              rather than being forced into a shared structure.
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <span class="principle-number">02</span>
+            <h3>Utility</h3>
+            <p>
+              Things are built to be useful. Ideas become products when they
+              can provide meaningful value.
+            </p>
+          </article>
+
+          <article class="principle reveal">
+            <span class="principle-number">03</span>
+            <h3>Evolution</h3>
+            <p>
+              TGG HUB can change as the products around it change. The
+              structure is designed to grow rather than remain fixed.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="section-layout">
+          <div class="section-heading reveal">
+            <span class="section-index">05</span>
+            <h2>What's ahead.</h2>
+          </div>
+
+          <div class="section-content reveal">
+            <p>
+              The next chapter is still being built.
+            </p>
+
+            <p>
+              TGG HUB will continue to grow alongside the products connected
+              to it, while preserving the independence that gives each project
+              room to develop on its own terms.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="future">
+      <div class="container">
+        <div class="reveal">
+          <h2>The next chapter is still being built.</h2>
+
+          <p>
+            One ecosystem. Independent products. More directions to come.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-brand">TGG HUB</span>
+        <span class="footer-copy">
+          © <span data-year></span> TGG HUB. Built to evolve.
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/main.js"></script>
 </body>
 </html>
