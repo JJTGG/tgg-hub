@@ -1,506 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Get in touch with TGG HUB. Connect with the ecosystem, share an idea, or reach out about what we're building.">
-    <meta name="theme-color" content="#0a0a0a">
+  <title>Contact — TGG HUB</title>
+  <meta
+    name="description"
+    content="Get in touch with TGG HUB."
+  >
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="TGG HUB">
+  <meta name="theme-color" content="#080808">
 
-    <title>Contact — TGG HUB</title>
+  <link rel="canonical" href="https://tgg-hub.vercel.app/contact.html">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact — TGG HUB">
+  <meta
+    property="og:description"
+    content="Get in touch with TGG HUB."
+  >
+  <meta property="og:url" content="https://tgg-hub.vercel.app/contact.html">
+  <meta property="og:site_name" content="TGG HUB">
 
-        html {
-            scroll-behavior: smooth;
-        }
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Contact — TGG HUB">
+  <meta
+    name="twitter:description"
+    content="Get in touch with TGG HUB."
+  >
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0a0a0a;
-            color: #f5f5f5;
-            line-height: 1.6;
-        }
+  <link rel="stylesheet" href="styles/main.css">
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+  <style>
+    .page-hero {
+      padding: 120px 0 90px;
+    }
 
-        .container {
-            width: min(1100px, 90%);
-            margin: 0 auto;
-        }
+    .page-label {
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
 
-        /* NAVIGATION */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.88);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #1c1c1c;
-        }
+    .page-hero h1 {
+      max-width: 900px;
+      margin-top: 18px;
+      font-size: clamp(3.4rem, 8vw, 7rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+    }
 
-        nav {
-            min-height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    .page-hero p {
+      max-width: 650px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
 
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-        }
+    .contact-section {
+      padding: 30px 0 120px;
+    }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
 
-        .nav-links a {
-            color: #999;
-            font-size: 0.9rem;
-            transition: color 0.25s ease;
-        }
+    .contact-card {
+      min-height: 260px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #fff;
-        }
+    .contact-card:hover {
+      transform: translateY(-4px);
+      border-color: #383838;
+    }
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+    .contact-number {
+      color: #555;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
 
-        /* HERO */
-        .hero {
-            padding: 140px 0 110px;
-            border-bottom: 1px solid #1c1c1c;
-        }
+    .contact-card h2 {
+      margin-top: 55px;
+      font-size: 1.5rem;
+      letter-spacing: -0.04em;
+    }
 
-        .eyebrow {
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.75rem;
-            margin-bottom: 20px;
-        }
+    .contact-card p {
+      max-width: 480px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
 
-        .hero h1 {
-            max-width: 850px;
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 0.98;
-            letter-spacing: -0.05em;
-            margin-bottom: 32px;
-        }
+    .contact-card .status {
+      align-self: flex-start;
+      margin-top: 30px;
+    }
 
-        .hero p {
-            max-width: 680px;
-            color: #aaa;
-            font-size: clamp(1.05rem, 2vw, 1.25rem);
-        }
+    .contact-note {
+      max-width: 700px;
+      margin-top: 80px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+    }
 
-        /* CONTACT */
-        .contact-section {
-            padding: 100px 0;
-        }
+    .contact-note p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 0.8fr 1.4fr;
-            gap: 80px;
-        }
+    @media (max-width: 760px) {
+      .page-hero {
+        padding: 90px 0 70px;
+      }
 
-        .section-label {
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            font-size: 0.72rem;
-            font-weight: 700;
-        }
+      .page-hero h1 {
+        font-size: clamp(3.4rem, 17vw, 5rem);
+      }
 
-        .contact-content h2 {
-            font-size: clamp(2rem, 5vw, 3.4rem);
-            line-height: 1.05;
-            letter-spacing: -0.04em;
-            margin-bottom: 24px;
-        }
+      .contact-section {
+        padding-bottom: 90px;
+      }
 
-        .contact-content > p {
-            max-width: 650px;
-            color: #999;
-            font-size: 1.05rem;
-            margin-bottom: 45px;
-        }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
 
-        /* CONTACT OPTIONS */
-        .contact-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .contact-card {
-            display: block;
-            padding: 30px;
-            border: 1px solid #222;
-            background: #0d0d0d;
-            transition:
-                border-color 0.25s ease,
-                transform 0.25s ease,
-                background 0.25s ease;
-        }
-
-        .contact-card:hover {
-            border-color: #444;
-            background: #111;
-            transform: translateY(-3px);
-        }
-
-        .contact-card span {
-            display: block;
-            color: #555;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            margin-bottom: 18px;
-        }
-
-        .contact-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 8px;
-        }
-
-        .contact-card p {
-            color: #777;
-            font-size: 0.9rem;
-        }
-
-        /* NOTE */
-        .note {
-            margin-top: 20px;
-            padding: 28px;
-            border-left: 2px solid #333;
-            background: #0d0d0d;
-        }
-
-        .note p {
-            color: #777;
-            font-size: 0.9rem;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 35px 0;
-            border-top: 1px solid #1c1c1c;
-        }
-
-        .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .footer-brand {
-            font-weight: 800;
-            letter-spacing: 0.08em;
-        }
-
-        .footer-copy {
-            color: #555;
-            font-size: 0.8rem;
-        }
-
-        /* REVEAL */
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition:
-                opacity 0.7s ease,
-                transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 800px) {
-
-            .nav-links {
-                position: absolute;
-                top: 72px;
-                left: 0;
-                right: 0;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0;
-                padding: 10px 5%;
-                background: #0a0a0a;
-                border-bottom: 1px solid #1c1c1c;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links a {
-                width: 100%;
-                padding: 16px 0;
-                border-bottom: 1px solid #181818;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero {
-                padding: 100px 0 80px;
-            }
-
-            .contact-section {
-                padding: 75px 0;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .contact-options {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            html {
-                scroll-behavior: auto;
-            }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
-    </style>
+      .contact-card {
+        min-height: 230px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="brand">TGG HUB</a>
 
-    <header>
-        <div class="container">
-            <nav>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
 
-                <a href="index.html" class="logo">
-                    TGG HUB
-                </a>
-
-                <button
-                    class="menu-toggle"
-                    aria-label="Toggle navigation"
-                    aria-expanded="false"
-                >
-                    ☰
-                </button>
-
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="ecosystem.html">Ecosystem</a>
-                    <a href="about.html">About</a>
-                    <a href="contact.html" class="active">Contact</a>
-                </div>
-
-            </nav>
+        <div class="nav-links">
+          <a href="ecosystem.html">Ecosystem</a>
+          <a href="about.html">About</a>
+          <a href="contact.html" class="active">Contact</a>
         </div>
-    </header>
+      </nav>
+    </div>
+  </header>
 
-    <main>
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="reveal">
+          <div class="page-label">Contact</div>
 
-        <!-- HERO -->
-        <section class="hero">
-            <div class="container reveal">
+          <h1>Let's build something.</h1>
 
-                <div class="eyebrow">
-                    Contact TGG HUB
-                </div>
-
-                <h1>
-                    Have something to say?
-                </h1>
-
-                <p>
-                    Whether you want to connect, share an idea, discuss a
-                    project, or simply reach out — this is where the
-                    conversation starts.
-                </p>
-
-            </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section class="contact-section">
-
-            <div class="container contact-grid reveal">
-
-                <div>
-                    <div class="section-label">
-                        01 / Get in touch
-                    </div>
-                </div>
-
-                <div class="contact-content">
-
-                    <h2>
-                        Start a conversation.
-                    </h2>
-
-                    <p>
-                        TGG HUB is still evolving. As the ecosystem grows,
-                        more ways to connect with the individual projects
-                        and the wider ecosystem will become available.
-                    </p>
-
-                    <div class="contact-options">
-
-                        <!-- Replace the placeholder links when real
-                             contact channels are ready. -->
-
-                        <a href="#" class="contact-card">
-                            <span>General</span>
-                            <h3>General Enquiries</h3>
-                            <p>
-                                Questions, ideas, feedback, or anything
-                                related to TGG HUB.
-                            </p>
-                        </a>
-
-                        <a href="#" class="contact-card">
-                            <span>Projects</span>
-                            <h3>Project Discussions</h3>
-                            <p>
-                                Interested in one of the projects within
-                                the ecosystem?
-                            </p>
-                        </a>
-
-                    </div>
-
-                    <div class="note">
-                        <p>
-                            Contact channels are being established as the
-                            ecosystem develops. More direct communication
-                            options will be introduced when they're ready.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="container">
-
-            <div class="footer-inner">
-
-                <div class="footer-brand">
-                    TGG HUB
-                </div>
-
-                <div class="footer-copy">
-                    © 2026 TGG HUB. Built to evolve.
-                </div>
-
-            </div>
-
+          <p>
+            TGG HUB is still evolving. As the ecosystem grows, this page will
+            become the place for relevant ways to connect.
+          </p>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        const menuToggle = document.querySelector(".menu-toggle");
-        const navLinks = document.querySelector(".nav-links");
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <div>
+              <span class="contact-number">01</span>
 
-        menuToggle.addEventListener("click", () => {
+              <h2>General</h2>
 
-            const isOpen = navLinks.classList.toggle("open");
+              <p>
+                General contact information will be made available here when
+                the appropriate channel is established.
+              </p>
+            </div>
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen
-            );
-        });
+            <span class="status">Coming Soon</span>
+          </article>
 
-        document.querySelectorAll(".nav-links a").forEach(link => {
+          <article class="contact-card reveal">
+            <div>
+              <span class="contact-number">02</span>
 
-            link.addEventListener("click", () => {
+              <h2>Partnerships</h2>
 
-                navLinks.classList.remove("open");
+              <p>
+                Partnership and collaboration enquiries will have a dedicated
+                channel as the ecosystem develops.
+              </p>
+            </div>
 
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-            });
+            <span class="status">Coming Soon</span>
+          </article>
+        </div>
 
-        });
+        <div class="contact-note reveal">
+          <p>
+            No placeholder contact links are being published. When a channel
+            is ready, it will be connected here directly.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        const revealElements =
-            document.querySelectorAll(".reveal");
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-brand">TGG HUB</span>
+        <span class="footer-copy">
+          © <span data-year></span> TGG HUB. Built to evolve.
+        </span>
+      </div>
+    </div>
+  </footer>
 
-        const revealObserver =
-            new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("visible");
-
-                            revealObserver.unobserve(
-                                entry.target
-                            );
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.12
-                }
-            );
-
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
-    </script>
-
+  <script src="scripts/main.js"></script>
 </body>
 </html>
