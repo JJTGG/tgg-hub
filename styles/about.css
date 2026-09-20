@@ -1,0 +1,190 @@
+.page-hero {
+  padding: 120px 0 100px;
+}
+
+.page-label {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-hero h1 {
+  max-width: 1000px;
+  margin-top: 18px;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.94;
+  letter-spacing: -0.07em;
+}
+
+.page-hero p {
+  max-width: 700px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.about-section {
+  padding: 100px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-index {
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.section-layout {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 70px;
+}
+
+.section-heading h2 {
+  max-width: 500px;
+  margin-top: 18px;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.section-content {
+  max-width: 650px;
+}
+
+.section-content p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.section-content p + p {
+  margin-top: 20px;
+}
+
+.ecosystem-model {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 55px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.model-card {
+  min-height: 230px;
+  padding: 28px;
+  background: var(--surface);
+}
+
+.model-number {
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.model-card h3 {
+  margin-top: 55px;
+  font-size: 1.15rem;
+  letter-spacing: -0.035em;
+}
+
+.model-card p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 55px;
+}
+
+.principle {
+  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.principle-number {
+  color: #555;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.principle h3 {
+  margin-top: 45px;
+  font-size: 1.2rem;
+}
+
+.principle p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.future {
+  padding: 120px 0;
+  text-align: center;
+}
+
+.future h2 {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+}
+
+.future p {
+  max-width: 600px;
+  margin: 25px auto 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 800px) {
+  .page-hero {
+    padding: 90px 0 75px;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(3.4rem, 16vw, 5.5rem);
+  }
+
+  .about-section {
+    padding: 75px 0;
+  }
+
+  .section-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .ecosystem-model,
+  .principles {
+    grid-template-columns: 1fr;
+  }
+
+  .model-card {
+    min-height: 190px;
+  }
+
+  .model-card h3,
+  .principle h3 {
+    margin-top: 30px;
+  }
+
+  .future {
+    padding: 90px 0;
+  }
+}
