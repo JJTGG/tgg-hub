@@ -1,91 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="The page you're looking for doesn't exist on TGG HUB.">
+  <title>404 — TGG HUB</title>
+  <meta
+    name="description"
+    content="The page you're looking for could not be found."
+  >
+  <meta name="robots" content="noindex">
 
-    <title>404 — TGG HUB</title>
+  <link rel="stylesheet" href="styles/main.css">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    main {
+      min-height: calc(100vh - var(--header-height));
+      display: flex;
+      align-items: center;
+    }
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            background: #0a0a0a;
-            color: #f5f5f5;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    .error {
+      width: 100%;
+      padding: 100px 0;
+    }
 
-        .container {
-            width: min(700px, 100%);
-            text-align: center;
-        }
+    .error-code {
+      color: #555;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
 
-        .code {
-            color: #555;
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
+    .error h1 {
+      max-width: 900px;
+      margin-top: 18px;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.85;
+      letter-spacing: -0.08em;
+    }
 
-        h1 {
-            font-size: clamp(4rem, 15vw, 9rem);
-            line-height: 0.9;
-            letter-spacing: -0.07em;
-            margin-bottom: 25px;
-        }
+    .error p {
+      max-width: 500px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
 
-        p {
-            max-width: 500px;
-            margin: 0 auto 35px;
-            color: #888;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        a {
-            display: inline-block;
-            padding: 13px 22px;
-            border: 1px solid #333;
-            color: #fff;
-            font-size: 0.9rem;
-            transition: background 0.25s ease, border-color 0.25s ease;
-        }
-
-        a:hover {
-            background: #151515;
-            border-color: #555;
-        }
-    </style>
+    .error .btn {
+      margin-top: 32px;
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="brand">TGG HUB</a>
 
-    <main class="container">
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
 
-        <div class="code">Error 404</div>
+        <div class="nav-links">
+          <a href="ecosystem.html">Ecosystem</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-        <h1>Lost.</h1>
+  <main>
+    <section class="error">
+      <div class="container">
+        <div class="reveal">
+          <span class="error-code">404 — Page not found</span>
 
-        <p>
-            This page doesn't exist, or it may have moved.
-            Either way, there's still somewhere better to go.
-        </p>
+          <h1>Lost.</h1>
 
-        <a href="index.html">Return to TGG HUB</a>
+          <p>
+            The page you're looking for doesn't exist or may have moved.
+          </p>
 
-    </main>
+          <a href="index.html" class="btn btn-primary">Back to TGG HUB</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-brand">TGG HUB</span>
+        <span class="footer-copy">
+          © <span data-year></span> TGG HUB. Built to evolve.
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/main.js"></script>
 </body>
 </html>
