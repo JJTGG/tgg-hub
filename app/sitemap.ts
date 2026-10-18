@@ -1,7 +1,8 @@
-
 import type { MetadataRoute } from "next";
 import { PROJECTS } from "@/data/projects";
 import { SITE_URL } from "@/lib/site";
+
+export const dynamic = "force-static";
 
 const staticRoutes = [
   "",
