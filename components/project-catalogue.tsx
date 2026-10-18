@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -14,7 +13,7 @@ import { ProjectCard } from "@/components/project-card";
 type StatusFilter = ProjectStatus | "all";
 type CategoryFilter = ProjectCategory | "all";
 
-const statusOptions: StatusFilter[] = [
+const statusOptions: ProjectStatus[] = [
   "available",
   "in-development",
   "experimental",
