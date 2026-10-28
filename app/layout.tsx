@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import {
@@ -7,7 +8,42 @@ import {
   SITE_URL
 } from "@/lib/site";
 import "./globals.css";
-import "./revamp.css";
+
+const themeInitialization = `(() => {
+  const root = document.documentElement;
+  let preference = "system";
+
+  try {
+    const saved = window.localStorage.getItem("tgg-hub-theme");
+
+    if (saved === "light" || saved === "dark") {
+      preference = saved;
+    }
+  } catch {}
+
+  const systemPrefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+
+  const theme =
+    preference === "system"
+      ? systemPrefersDark ? "dark" : "light"
+      : preference;
+
+  root.dataset.themePreference = preference;
+  root.dataset.theme = theme;
+
+  const themeColor = document.getElementById(
+    "tgg-hub-theme-color"
+  );
+
+  if (themeColor) {
+    themeColor.setAttribute(
+      "content",
+      theme === "dark" ? "#12161C" : "#F7F6F2"
+    );
+  }
+})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -39,8 +75,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   width: "device-width",
-  initialScale: 1,
-  themeColor: "#F7F6F2"
+  initialScale: 1
 };
 
 export default function RootLayout({
@@ -49,7 +84,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta
+          id="tgg-hub-theme-color"
+          name="theme-color"
+          content="#F7F6F2"
+        />
+        <Script
+          id="tgg-hub-theme-initializer"
+          strategy="beforeInteractive"
+        >
+          {themeInitialization}
+        </Script>
+      </head>
       <body>
         <SiteHeader />
         {children}
