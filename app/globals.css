@@ -1171,7 +1171,6 @@ summary:focus-visible {
 }
 
 .category-label--muted {
-  color: var(--muted);
   background: transparent;
   border-style: dashed;
 }
@@ -1796,5 +1795,115 @@ body,
   .catalogue__filter select,
   .theme-switcher__panel {
     transition: none;
+  }
+}
+
+/* Tablet navigation and catalogue-specific spacing. */
+.page-hero--catalogue {
+  padding-block: clamp(56px, 7vw, 78px) 30px;
+}
+
+.page-hero--catalogue h1 {
+  font-size: clamp(2.7rem, 6vw, 4.7rem);
+}
+
+.catalogue-section--compact.section {
+  padding-top: 32px;
+}
+
+@media (min-width: 681px) and (max-width: 740px) {
+  .site-header__inner {
+    gap: 10px;
+  }
+
+  .desktop-navigation {
+    display: none;
+  }
+
+  .mobile-navigation {
+    position: relative;
+    display: block;
+  }
+
+  .mobile-navigation summary {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--pill);
+    padding: 0 13px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 700;
+    list-style: none;
+  }
+
+  .mobile-navigation summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-navigation__icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-navigation__icon span {
+    display: block;
+    width: 13px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .mobile-navigation__panel {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 10px);
+    right: 0;
+    display: flex;
+    width: min(280px, calc(100vw - 32px));
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 8px;
+    background: var(--surface);
+    box-shadow: 0 18px 45px rgb(0 0 0 / 12%);
+  }
+
+  .mobile-navigation__link {
+    border-radius: 9px;
+    padding: 13px 12px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 620;
+  }
+
+  .mobile-navigation__link:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+}
+
+@media (max-width: 680px) {
+  .page-hero--catalogue {
+    padding-block: 38px 24px;
+  }
+
+  .page-hero--catalogue h1 {
+    font-size: clamp(2.45rem, 10.5vw, 3.5rem);
+  }
+
+  .page-hero--catalogue .page-hero__inner > p:last-child {
+    margin-top: 14px;
+    font-size: 0.95rem;
+  }
+
+  .catalogue-section--compact.section {
+    padding-top: 28px;
   }
 }
