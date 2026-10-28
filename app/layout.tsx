@@ -1,9 +1,13 @@
-
 import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL
+} from "@/lib/site";
 import "./globals.css";
+import "./revamp.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
