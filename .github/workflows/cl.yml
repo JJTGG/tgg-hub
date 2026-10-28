@@ -73,6 +73,9 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Build static site
+        env:
+          TGG_HUB_SITE_URL: https://revamp-preview.tgg-hub-revamp-preview.pages.dev
+          TGG_HUB_NOINDEX: "true"
         run: npm run build
 
       - name: Commit dependency and configuration updates
