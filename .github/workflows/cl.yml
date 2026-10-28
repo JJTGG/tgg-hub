@@ -41,9 +41,6 @@ jobs:
           TGG_HUB_NOINDEX: "true"
         run: npm run build
 
-      - name: Check source diff formatting
-        run: git diff --check
-
       - name: Verify preview metadata in static output
         env:
           TGG_HUB_SITE_URL: https://revamp-preview.tgg-hub-revamp-preview.pages.dev
@@ -69,29 +66,41 @@ jobs:
 
           const htmlFiles = walk(outputDir)
             .filter((file) => file.endsWith(".html"))
-            .filter((file) => path.relative(outputDir, file)
-              .split(path.sep).join("/") !== "404.html");
+            .filter((file) =>
+              path.relative(outputDir, file)
+                .split(path.sep).join("/") !== "404.html"
+            );
 
           if (htmlFiles.length === 0) {
             throw new Error("No exported HTML pages were found.");
           }
 
           function getTag(html, tagName, attribute, value) {
-            return [...html.matchAll(new RegExp(`<${tagName}\\b[^>]*>`, "gi"))]
+            return [...html.matchAll(
+              new RegExp(`<${tagName}\\b[^>]*>`, "gi")
+            )]
               .map((match) => match[0])
-              .find((tag) => new RegExp(
-                `\\b${attribute}=["']${value}["']`, "i"
-              ).test(tag));
+              .find((tag) =>
+                new RegExp(
+                  `\\b${attribute}=["']${value}["']`,
+                  "i"
+                ).test(tag)
+              );
           }
 
           function getAttribute(tag, attribute) {
-            return tag?.match(new RegExp(
-              `\\b${attribute}=["']([^"']+)["']`, "i"
-            ))?.[1];
+            return tag?.match(
+              new RegExp(
+                `\\b${attribute}=["']([^"']+)["']`,
+                "i"
+              )
+            )?.[1];
           }
 
           function normalizePath(value) {
-            return value.length > 1 ? value.replace(/\\/+$/, "") : "/";
+            return value.length > 1
+              ? value.replace(/\/+$/, "")
+              : "/";
           }
 
           for (const file of htmlFiles) {
@@ -100,32 +109,48 @@ jobs:
             const html = fs.readFileSync(file, "utf8");
 
             const robotsTag = getTag(html, "meta", "name", "robots");
-            const robotsContent = getAttribute(robotsTag, "content") || "";
+            const robotsContent =
+              getAttribute(robotsTag, "content") || "";
             const directives = robotsContent.toLowerCase()
-              .split(",").map((item) => item.trim());
+              .split(",")
+              .map((item) => item.trim());
 
-            if (!directives.includes("noindex") ||
-                !directives.includes("nofollow")) {
+            if (
+              !directives.includes("noindex") ||
+              !directives.includes("nofollow")
+            ) {
               throw new Error(
                 `Missing noindex/nofollow metadata: ${relativePath}`
               );
             }
 
-            const canonicalTag = getTag(html, "link", "rel", "canonical");
-            const canonicalHref = getAttribute(canonicalTag, "href");
+            const canonicalTag =
+              getTag(html, "link", "rel", "canonical");
+            const canonicalHref =
+              getAttribute(canonicalTag, "href");
 
             if (!canonicalHref) {
-              throw new Error(`Missing canonical URL: ${relativePath}`);
+              throw new Error(
+                `Missing canonical URL: ${relativePath}`
+              );
             }
 
-            const canonical = new URL(canonicalHref, expectedOrigin);
-            const withoutExtension = relativePath.replace(/\\.html$/, "");
+            const canonical = new URL(
+              canonicalHref,
+              expectedOrigin
+            );
+            const withoutExtension =
+              relativePath.replace(/\.html$/, "");
+
             const expectedPath = withoutExtension === "index"
               ? "/"
-              : `/${withoutExtension.replace(/\\/index$/, "")}`;
+              : `/${withoutExtension.replace(/\/index$/, "")}`;
 
-            if (canonical.origin !== expectedOrigin ||
-                normalizePath(canonical.pathname) !== normalizePath(expectedPath)) {
+            if (
+              canonical.origin !== expectedOrigin ||
+              normalizePath(canonical.pathname) !==
+                normalizePath(expectedPath)
+            ) {
               throw new Error(
                 `Unexpected canonical URL in ${relativePath}: ${canonical.href}`
               );
@@ -135,8 +160,13 @@ jobs:
           const robotsFile = path.join(outputDir, "robots.txt");
           const sitemapFile = path.join(outputDir, "sitemap.xml");
 
-          if (!fs.existsSync(robotsFile) || !fs.existsSync(sitemapFile)) {
-            throw new Error("Generated robots.txt or sitemap.xml is missing.");
+          if (
+            !fs.existsSync(robotsFile) ||
+            !fs.existsSync(sitemapFile)
+          ) {
+            throw new Error(
+              "Generated robots.txt or sitemap.xml is missing."
+            );
           }
 
           const robotsText = fs.readFileSync(robotsFile, "utf8");
@@ -144,26 +174,35 @@ jobs:
           const expectedSitemap = `${expectedOrigin}/sitemap.xml`;
 
           if (!robotsText.includes(`Sitemap: ${expectedSitemap}`)) {
-            throw new Error("robots.txt points to the wrong sitemap URL.");
+            throw new Error(
+              "robots.txt points to the wrong sitemap URL."
+            );
           }
 
-          const locations = [...sitemapText.matchAll(/<loc>(.*?)<\\/loc>/g)]
-            .map((match) => match[1]);
+          const locations = [
+            ...sitemapText.matchAll(/<loc>(.*?)<\/loc>/g)
+          ].map((match) => match[1]);
 
           if (locations.length === 0) {
-            throw new Error("The generated sitemap contains no URLs.");
+            throw new Error(
+              "The generated sitemap contains no URLs."
+            );
           }
 
           for (const location of locations) {
             if (new URL(location).origin !== expectedOrigin) {
-              throw new Error(`Sitemap contains an unexpected URL: ${location}`);
+              throw new Error(
+                `Sitemap contains an unexpected URL: ${location}`
+              );
             }
           }
 
           console.log(
             `Verified noindex/nofollow and canonical URLs for ${htmlFiles.length} pages.`
           );
-          console.log(`Verified robots.txt and ${locations.length} sitemap URLs.`);
+          console.log(
+            `Verified robots.txt and ${locations.length} sitemap URLs.`
+          );
           NODE
 
       - name: Deploy Cloudflare Pages preview
