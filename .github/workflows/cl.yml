@@ -6,7 +6,7 @@ on:
       - revamp/tgg-hub-v2
 
 permissions:
-  contents: read
+  contents: write
   deployments: write
 
 concurrency:
@@ -22,17 +22,82 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: true
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 22
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Normalize dependency and TypeScript configuration
+        run: |
+          node <<'NODE'
+          const fs = require("node:fs");
+
+          const packagePath = "package.json";
+          const packageJson = JSON.parse(
+            fs.readFileSync(packagePath, "utf8")
+          );
+
+          packageJson.devDependencies ??= {};
+
+          if (packageJson.devDependencies.wrangler !== "4.154.0") {
+            packageJson.devDependencies.wrangler = "4.154.0";
+
+            fs.writeFileSync(
+              packagePath,
+              `${JSON.stringify(packageJson, null, 2)}\n`
+            );
+          }
+
+          const tsconfigPath = "tsconfig.json";
+          const tsconfig = JSON.parse(
+            fs.readFileSync(tsconfigPath, "utf8")
+          );
+
+          if (tsconfig.compilerOptions?.jsx === "preserve") {
+            tsconfig.compilerOptions.jsx = "react-jsx";
+
+            fs.writeFileSync(
+              tsconfigPath,
+              `${JSON.stringify(tsconfig, null, 2)}\n`
+            );
+          }
+          NODE
+
+      - name: Generate or refresh dependency lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
 
       - name: Build static site
         run: npm run build
+
+      - name: Commit dependency and configuration updates
+        run: |
+          git diff --check
+
+          git add package.json package-lock.json tsconfig.json
+
+          if git diff --cached --quiet; then
+            echo "Dependency lockfile and compiler configuration are current."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+            git commit -m "build: lock dependencies and pin Wrangler"
+            git push origin HEAD:refs/heads/revamp/tgg-hub-v2
+          fi
+
+      - name: Verify clean working tree
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --short
+            echo "Unexpected uncommitted changes remain."
+            exit 1
+          fi
 
       - name: Deploy Cloudflare Pages preview
         uses: cloudflare/wrangler-action@v4
