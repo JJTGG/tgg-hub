@@ -1,6 +1,7 @@
 export type ProjectRelationship = "built" | "adopted" | "partner";
 
 export type ProjectStatus =
+  | "planned"
   | "available"
   | "in-development"
   | "experimental"
@@ -23,9 +24,12 @@ export type ProjectDomain =
   | "Commerce"
   | "Community & social"
   | "Developer tools"
+  | "Education"
   | "Gaming"
+  | "Health"
   | "Infrastructure"
   | "Productivity"
+  | "Sustainability"
   | "Trading"
   | "Web3";
 
@@ -60,6 +64,7 @@ export type Project = {
 };
 
 export const STATUS_LABELS: Record<ProjectStatus, string> = {
+  planned: "Planned",
   available: "Available",
   "in-development": "In development",
   experimental: "Experimental",
@@ -90,9 +95,12 @@ export const PROJECT_DOMAINS: ProjectDomain[] = [
   "Commerce",
   "Community & social",
   "Developer tools",
+  "Education",
   "Gaming",
+  "Health",
   "Infrastructure",
   "Productivity",
+  "Sustainability",
   "Trading",
   "Web3"
 ];
@@ -104,11 +112,17 @@ export const PROJECTS: Project[] = [
     name: "Agoré",
     mark: "AG",
     summary:
-      "The first version of Agoré is complete. A fuller public description and official destination still need to be verified.",
+      "A social platform for people, public content, discovery and private communication. V1 is complete, and the product is being refined.",
     type: "product",
     relationship: "built",
     status: "completed",
-    domains: ["Community & social"]
+    domains: ["Community & social"],
+    destinations: [
+      {
+        label: "Visit Agoré",
+        url: "https://agore.vercel.app/"
+      }
+    ]
   },
   {
     id: "trading-tools",
@@ -121,6 +135,12 @@ export const PROJECTS: Project[] = [
     relationship: "built",
     status: "available",
     domains: ["Trading", "Productivity"],
+    destinations: [
+      {
+        label: "Open Trading Tools",
+        url: "https://trading-tools-xi.vercel.app/"
+      }
+    ],
     featured: true,
     detail: {
       introduction:
@@ -150,6 +170,12 @@ export const PROJECTS: Project[] = [
     relationship: "built",
     status: "available",
     domains: ["AI", "Developer tools"],
+    destinations: [
+      {
+        label: "Open AI Arena",
+        url: "https://ai-arena-red.vercel.app/"
+      }
+    ],
     featured: true,
     detail: {
       introduction:
@@ -202,10 +228,10 @@ export const PROJECTS: Project[] = [
     name: "NEXVARIN",
     mark: "NX",
     summary:
-      "An infrastructure initiative under development; proposed capabilities must not be presented as already delivered.",
+      "An infrastructure initiative in architecture and implementation preparation. Its initial specification is defined, but implementation and production infrastructure have not started.",
     type: "infrastructure",
     relationship: "built",
-    status: "in-development",
+    status: "planned",
     domains: ["Infrastructure"]
   },
   {
@@ -214,11 +240,17 @@ export const PROJECTS: Project[] = [
     name: "Craftmish",
     mark: "CM",
     summary:
-      "A standalone project under development. More specific public details await portfolio review.",
+      "A knowledge and learning system for builders that connects technologies, concepts, skills, learning resources, roadmaps, challenges and projects.",
     type: "project",
     relationship: "built",
     status: "in-development",
-    domains: []
+    domains: ["Education", "Productivity"],
+    destinations: [
+      {
+        label: "Open Craftmish",
+        url: "https://craftmish.vercel.app/"
+      }
+    ]
   },
   {
     id: "meayu",
@@ -226,11 +258,11 @@ export const PROJECTS: Project[] = [
     name: "Meayu",
     mark: "MY",
     summary:
-      "An independent project under development. Its public domain and product description need further verification.",
+      "A product for turning personal context and selected material into a tailored digital experience. The creator prepares, reviews, approves and shares the result.",
     type: "project",
     relationship: "built",
     status: "in-development",
-    domains: []
+    domains: ["Productivity"]
   },
   {
     id: "vortyx",
@@ -266,7 +298,7 @@ export const PROJECTS: Project[] = [
     name: "Trading Signal Dropper",
     mark: "TSD",
     summary:
-      "An automation project focused on publishing trading signals through its intended channels.",
+      "A trading automation project with strategy evaluation, indicators, backtesting and Telegram-related components. It remains under development rather than being presented as an established signal service.",
     type: "tool",
     relationship: "built",
     status: "in-development",
@@ -278,11 +310,17 @@ export const PROJECTS: Project[] = [
     name: "Testing Ground",
     mark: "TG",
     summary:
-      "An experimental environment for testing ideas and behaviour before treating them as finished products.",
+      "An evolving environment for testing technologies and ideas under controlled conditions, then preserving observations before treating results as established.",
     type: "experiment",
     relationship: "built",
-    status: "experimental",
-    domains: ["Developer tools"]
+    status: "in-development",
+    domains: ["Developer tools"],
+    destinations: [
+      {
+        label: "Open Testing Ground",
+        url: "https://testing-ground-gilt.vercel.app/"
+      }
+    ]
   },
   {
     id: "fake-os",
@@ -294,7 +332,13 @@ export const PROJECTS: Project[] = [
     type: "experiment",
     relationship: "built",
     status: "experimental",
-    domains: ["Developer tools"]
+    domains: ["Developer tools"],
+    destinations: [
+      {
+        label: "Open Fake OS",
+        url: "https://jjtgg.github.io/fake-os/"
+      }
+    ]
   },
   {
     id: "auren-store",
@@ -302,11 +346,115 @@ export const PROJECTS: Project[] = [
     name: "AUREN Store",
     mark: "AS",
     summary:
-      "A storefront demo exploring the presentation and flow of an online shopping experience.",
+      "A fictional storefront concept exploring product presentation, catalogue discovery and an online shopping experience.",
     type: "demo",
     relationship: "built",
     status: "demo",
-    domains: ["Commerce"]
+    domains: ["Commerce"],
+    destinations: [
+      {
+        label: "View storefront demo",
+        url: "https://auren-store-delta.vercel.app/"
+      }
+    ]
+  },
+  {
+    id: "alder-grove-schools",
+    slug: "alder-grove-schools",
+    name: "Alder Grove Schools",
+    mark: "AGS",
+    summary:
+      "A fictional school website concept demonstrating a responsive, multi-page educational website. It is a portfolio demo, not an operating school.",
+    type: "demo",
+    relationship: "built",
+    status: "demo",
+    domains: ["Education"],
+    destinations: [
+      {
+        label: "View demo",
+        url: "https://alder-grove-schools.vercel.app/"
+      }
+    ]
+  },
+  {
+    id: "havenwell-pharmacy-demo",
+    slug: "havenwell-pharmacy-demo",
+    name: "Havenwell Pharmacy Demo",
+    mark: "HP",
+    summary:
+      "A fictional pharmacy website concept demonstrating clear service information, accessible navigation and responsible health-related communication. It is not an operating pharmacy.",
+    type: "demo",
+    relationship: "built",
+    status: "demo",
+    domains: ["Health"],
+    destinations: [
+      {
+        label: "View demo",
+        url: "https://havenwell-pharmacy-demo.vercel.app/"
+      }
+    ]
+  },
+  {
+    id: "perpetual",
+    slug: "perpetual",
+    name: "Perpetual",
+    mark: "PP",
+    summary:
+      "An experimental live-data dashboard exploring scheduled refreshes, automated testing, changing layouts and constrained recovery when data feeds or views fail.",
+    type: "experiment",
+    relationship: "built",
+    status: "experimental",
+    domains: ["Developer tools", "Infrastructure", "Productivity"],
+    destinations: [
+      {
+        label: "Open dashboard",
+        url: "https://perpetual-two.vercel.app/"
+      }
+    ]
+  },
+  {
+    id: "ecotrack",
+    slug: "ecotrack",
+    name: "EcoTrack",
+    mark: "ET",
+    summary:
+      "An early carbon-footprint tracking experiment for estimating emissions from everyday activities. Its web prototype and Python implementation remain experimental.",
+    type: "experiment",
+    relationship: "built",
+    status: "experimental",
+    domains: ["Productivity", "Sustainability"],
+    destinations: [
+      {
+        label: "Web prototype",
+        url: "https://jjtgg.github.io/experiment01.js/"
+      },
+      {
+        label: "Python source",
+        url: "https://github.com/JJTGG/EcoTrack.py"
+      }
+    ]
+  },
+  {
+    id: "cv-generator",
+    slug: "cv-generator",
+    name: "CV Generator",
+    mark: "CV",
+    summary:
+      "An unfinished CV-generation utility published as an experiment, rather than a completed or production-ready service.",
+    type: "experiment",
+    relationship: "built",
+    status: "experimental",
+    domains: ["Productivity"],
+    destinations: [
+      {
+        label: "Open prototype",
+        url: "https://cv-generator-dusky-ten.vercel.app/"
+      },
+      {
+        label: "Source repository",
+        url: "https://github.com/JJTGG/cv-generator"
+      }
+    ]
   }
 ];
 
