@@ -1,17 +1,15 @@
-
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
   getProjectBySlug,
   getProjectRelationshipLabel,
   getProjectStatusLabel,
+  getProjectTypeLabel,
   PROJECTS
 } from "@/data/projects";
 
 type ProjectPageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 };
 
 export const dynamicParams = false;
@@ -19,9 +17,7 @@ export const dynamicParams = false;
 export function generateStaticParams() {
   return PROJECTS
     .filter((project) => project.detail)
-    .map((project) => ({
-      slug: project.slug
-    }));
+    .map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
@@ -31,9 +27,7 @@ export async function generateMetadata({
   const project = getProjectBySlug(slug);
 
   if (!project?.detail) {
-    return {
-      title: "Project not found"
-    };
+    return { title: "Project not found" };
   }
 
   return {
@@ -78,26 +72,37 @@ export default async function ProjectDetailPage({
                 height={64}
               />
             ) : (
-              <span className="project-detail-hero__mark" aria-hidden="true">
+              <span
+                className="project-detail-hero__mark"
+                aria-hidden="true"
+              >
                 {project.mark}
               </span>
             )}
 
             <div>
               <p className="eyebrow">
-                {getProjectRelationshipLabel(project.relationship)}
+                {getProjectRelationshipLabel(
+                  project.relationship
+                )}
               </p>
               <h1>{project.name}</h1>
             </div>
           </div>
 
           <div className="project-detail-hero__metadata">
-            <span className={`status-badge status-badge--${project.status}`}>
+            <span
+              className={`status-badge status-badge--${project.status}`}
+            >
               {getProjectStatusLabel(project.status)}
             </span>
-            {project.categories.map((category) => (
-              <span className="category-label" key={category}>
-                {category}
+            <span className="category-label">
+              {getProjectTypeLabel(project.type)}
+            </span>
+
+            {project.domains.map((domain) => (
+              <span className="category-label" key={domain}>
+                {domain}
               </span>
             ))}
           </div>
@@ -110,7 +115,10 @@ export default async function ProjectDetailPage({
 
       {project.coverImage && (
         <section className="container project-cover">
-          <img src={project.coverImage} alt={`${project.name} project visual`} />
+          <img
+            src={project.coverImage}
+            alt={`${project.name} project visual`}
+          />
         </section>
       )}
 
@@ -119,8 +127,8 @@ export default async function ProjectDetailPage({
           <aside className="project-detail-sidebar">
             <p className="eyebrow">Project overview</p>
             <p>
-              This project maintains its own identity and development
-              lifecycle within the TGG HUB ecosystem.
+              This project maintains its own identity and
+              development lifecycle within the TGG HUB ecosystem.
             </p>
           </aside>
 
@@ -130,14 +138,38 @@ export default async function ProjectDetailPage({
             </p>
 
             {project.detail.sections.map((section) => (
-              <section className="project-detail-section" key={section.heading}>
+              <section
+                className="project-detail-section"
+                key={section.heading}
+              >
                 <h2>{section.heading}</h2>
                 <p>{section.body}</p>
               </section>
             ))}
 
+            {project.destinations &&
+              project.destinations.length > 0 && (
+                <div className="project-detail-destinations">
+                  {project.destinations.map((destination) => (
+                    <a
+                      className="button button--primary"
+                      href={destination.url}
+                      key={destination.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {destination.label}{" "}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+
             <div className="project-detail-return">
-              <a className="button button--secondary" href="/ecosystem">
+              <a
+                className="button button--secondary"
+                href="/ecosystem"
+              >
                 Back to the ecosystem
               </a>
             </div>
