@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectCatalogue } from "@/components/project-catalogue";
@@ -7,19 +6,21 @@ import { PROJECTS } from "@/data/projects";
 export const metadata: Metadata = {
   title: "Ecosystem",
   description:
-    "Explore the independent products, tools and experiments within the TGG HUB ecosystem.",
+    "Explore independent products, tools and experiments connected to TGG HUB by type, domain, lifecycle and relationship.",
   alternates: {
     canonical: "/ecosystem"
   },
   openGraph: {
     title: "Ecosystem — TGG HUB",
     description:
-      "Explore the independent products, tools and experiments within the TGG HUB ecosystem.",
+      "Browse TGG HUB's projects by type, domain, lifecycle and relationship.",
     url: "/ecosystem"
   }
 };
 
-const featuredProjects = PROJECTS.filter((project) => project.featured);
+const featuredProjects = PROJECTS.filter(
+  (project) => project.featured
+);
 
 export default function EcosystemPage() {
   return (
@@ -29,8 +30,9 @@ export default function EcosystemPage() {
           <p className="eyebrow">The ecosystem</p>
           <h1>Independent work, in one place.</h1>
           <p>
-            Explore products and experiments connected to TGG HUB.
-            Each project keeps its own purpose, identity and development path.
+            Explore products, tools and experiments connected
+            to TGG HUB. Each project keeps its own purpose,
+            identity and development path.
           </p>
         </div>
       </section>
@@ -66,8 +68,8 @@ export default function EcosystemPage() {
               <h2>The project catalogue</h2>
             </div>
             <p className="section-heading__copy">
-              Filter by current status or category, or search by name
-              and description.
+              Search by name or description, or narrow the
+              catalogue by type, domain, lifecycle or relationship.
             </p>
           </div>
 
