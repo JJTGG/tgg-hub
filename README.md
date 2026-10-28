@@ -1,8 +1,9 @@
+
 # TGG HUB
 
 **Different projects. Shared direction.**
 
-TGG HUB is an evolving technology ecosystem that connects independent products, tools, experiments and digital initiatives without forcing them into a single application or codebase.
+TGG HUB is an evolving technology ecosystem connecting independent products, tools, experiments and digital initiatives without forcing them into a single application or codebase.
 
 Each project can retain its own purpose, identity, repository, technology, deployment and development lifecycle. TGG HUB provides the shared public presence and discovery layer.
 
@@ -12,8 +13,8 @@ The website provides:
 
 - An overview of the ecosystem and its direction.
 - A searchable project catalogue with filters for type, domain, lifecycle and relationship.
-- Project overview pages for entries with detailed project information.
-- A Web3 page that distinguishes historical activity from current, verified opportunities.
+- Detailed overview pages for projects with supporting content.
+- A Web3 page covering TGG HUB's roots, official Stacks token, NFT collection and future direction.
 - An overview of digital services.
 - About and contact pages.
 - Page metadata, canonical URLs, sitemap generation, robots rules and legacy route redirects.
@@ -22,20 +23,22 @@ The site is designed to describe the ecosystem accurately. A project being liste
 
 ## Website
 
-The revamp is built with Next.js and exported as a static website for Cloudflare Pages.
+The revamp uses Next.js and is exported as a static website for Cloudflare Pages.
 
 - **Framework:** Next.js
 - **UI:** React
 - **Language:** TypeScript
 - **Rendering:** Static export
-- **Hosting preview:** Cloudflare Pages
+- **Preview hosting:** Cloudflare Pages
 - **Build automation:** GitHub Actions
 
-The current preview is available at:
+The preview is available at:
 
 https://revamp-preview.tgg-hub-revamp-preview.pages.dev/
 
-The preview is separate from the production website. The revamp branch has not been merged into `main`, and the preview workflow is not intended to deploy the production site.
+The preview is separate from production. Work takes place on `revamp/tgg-hub-v2`; production branch `main` remains unchanged until a separate release decision is made.
+
+The preview's canonical URL and `noindex`/`nofollow` metadata must remain configured for the preview hostname. The preview is not the production site.
 
 ## Routes
 
@@ -44,18 +47,18 @@ The preview is separate from the production website. The revamp branch has not b
 | `/` | Homepage and ecosystem introduction |
 | `/ecosystem` | Searchable and filterable project catalogue |
 | `/projects/[slug]` | Detailed overview for projects with detail content |
-| `/web3` | Web3 history, context and future direction |
+| `/web3` | Web3 roots, official Stacks assets and future direction |
 | `/services` | Digital service areas and enquiry routes |
 | `/about` | TGG HUB background and approach |
 | `/contact` | Contact routes for enquiries and corrections |
 
-The application also generates `sitemap.xml` and `robots.txt`.
+The application generates `robots.txt` and `sitemap.xml` through Next.js metadata route handlers in `app/robots.ts` and `app/sitemap.ts`.
 
 Legacy `.html` paths are redirected through the static hosting configuration where supported.
 
 ## Project catalogue
 
-The project's central catalogue is maintained in:
+The central catalogue is maintained in:
 
 `data/projects.ts`
 
@@ -75,7 +78,7 @@ The catalogue validates duplicate IDs and slugs, slug formatting, required descr
 
 ### Lifecycle statuses
 
-The status should reflect the project's actual stage rather than imply more maturity than has been established.
+Statuses should reflect each project's actual stage rather than imply more maturity than has been established.
 
 | Status | Meaning |
 | --- | --- |
@@ -107,12 +110,12 @@ TGG HUB
   |     +-- Agoré
   |     +-- Other listed projects
   |
-  +-- Web3 history and direction
+  +-- Web3 roots, assets and direction
   |
   +-- Digital services and contact
 ```
 
-The individual product codebases remain in their respective repositories. Listing a product in TGG HUB does not require transferring its implementation into this repository or introducing a shared backend.
+Individual product codebases remain in their respective repositories. Listing a product in TGG HUB does not require transferring its implementation into this repository or introducing a shared backend.
 
 Future integrations should be introduced only when a concrete use case justifies them.
 
@@ -153,15 +156,15 @@ tgg-hub/
 └── tsconfig.json
 ```
 
-The tree above shows the primary application structure; it is not an exhaustive listing of every repository file.
+This tree shows the primary application structure; it is not an exhaustive listing of every repository file.
 
 ## Development
 
 ### Requirements
 
-- Node.js 22 is used by the preview workflow.
-- npm, with dependencies installed from the committed lockfile.
-- Access to the repository to change code or project data.
+- Node.js 22, as used by the preview workflow.
+- npm and the committed dependency lockfile.
+- Access to the repository to make code and content changes.
 
 ### Install dependencies
 
@@ -187,9 +190,9 @@ npm run typecheck
 npm run build
 ```
 
-The build script runs TypeScript checking before creating the Next.js production build. The static export is written to `out/`.
+The build script runs TypeScript checking before creating the Next.js build. Static export output is written to `out/`.
 
-Before committing changes, review the diff and make sure generated build output and local dependency files are not included.
+Before committing changes, review the diff and ensure generated build output and local dependency files have not been included.
 
 ## Preview deployment
 
@@ -197,37 +200,52 @@ The workflow is defined in:
 
 `.github/workflows/cl.yml`
 
-A push to `revamp/tgg-hub-v2` triggers the preview workflow. It:
+A push to `revamp/tgg-hub-v2` triggers the Cloudflare Pages preview workflow. It:
 
-1. Checks out the repository and configures Node.js.
-2. Normalizes the pinned Wrangler version and TypeScript JSX configuration.
-3. Generates or refreshes the dependency lockfile.
-4. Installs the locked dependencies.
-5. Runs the production build.
-6. Commits dependency or configuration normalization when needed.
-7. Verifies the working tree is clean.
-8. Deploys the static export to the Cloudflare Pages preview project.
+1. Checks out the committed repository state without persisting checkout credentials.
+2. Sets up Node.js 22 and npm dependency caching.
+3. Installs dependencies using `npm ci` from the committed lockfile.
+4. Builds the static site with the preview canonical URL and `TGG_HUB_NOINDEX=true`.
+5. Verifies the generated metadata and SEO files in the static output.
+6. Deploys the `out/` directory to the Cloudflare Pages preview project.
 
-The workflow requires these GitHub Actions secrets:
+The metadata verification checks that public HTML output has `noindex` and `nofollow` directives, canonical URLs match the expected preview origin and generated `robots.txt` and `sitemap.xml` reference the correct preview domain.
+
+The workflow excludes the internal `404.html` and `_not-found.html` outputs from the public-page metadata checks.
+
+The workflow does not normalize or rewrite project configuration, regenerate the lockfile, or commit repository changes automatically. It builds and deploys the committed state.
+
+### Required GitHub Actions secrets
+
+The workflow uses:
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
 
-The preview deployment uses the Cloudflare Pages project `tgg-hub-revamp-preview` and a preview deployment branch named `revamp-preview`.
+It deploys to the Cloudflare Pages project `tgg-hub-revamp-preview`, using `revamp-preview` as the Cloudflare deployment branch alias.
 
-The preview workflow is not a production release workflow. Production deployment and any merge into `main` require a separate release decision.
+The workflow is for preview deployment only. It does not deploy the production site or merge changes into `main`.
 
 ## Site URL and metadata
 
-The configured site URL is managed in `lib/site.ts`.
+The configured site URL is managed in:
+
+`lib/site.ts`
 
 The environment variable is:
 
 `TGG_HUB_SITE_URL`
 
-It is used to construct canonical URLs, sitemap entries and related site metadata. The current code has a fallback value of `https://tgg-hub.vercel.app`.
+It is used to construct canonical URLs, sitemap entries and related metadata. The code's fallback URL is `https://tgg-hub.vercel.app`; this is not confirmation that the hostname has been approved as the final production domain.
 
-**Before a production release, configure `TGG_HUB_SITE_URL` to the intended canonical production domain and verify the generated metadata and sitemap.** The fallback is not confirmation that this is the final production domain.
+The preview workflow explicitly sets the preview hostname during the build. This keeps preview canonical URLs and generated sitemap links aligned with the preview deployment.
+
+Before production release:
+
+- Confirm the intended production hostname and hosting configuration.
+- Configure `TGG_HUB_SITE_URL` for that hostname.
+- Verify canonical URLs, robots output and sitemap contents against the production domain.
+- Remove preview-only indexing directives only as part of an approved production configuration.
 
 ## Contact behaviour
 
@@ -241,7 +259,7 @@ Product-specific support remains the responsibility of each project's own suppor
 
 The current public website is a static export and does not require a shared application database or authentication system for its catalogue and informational pages.
 
-The repository includes baseline response-header configuration and redirects for static hosting. Hosting behaviour should be verified after deployment.
+The repository includes baseline response-header configuration and redirects for static hosting. Their behaviour must be verified against the deployed site rather than inferred from configuration alone.
 
 External project links lead to independently operated destinations. Their availability, security, privacy practices and operational status are not guaranteed by TGG HUB merely because they appear in the catalogue.
 
@@ -249,14 +267,16 @@ External project links lead to independently operated destinations. Their availa
 
 Before promoting the revamp to production:
 
-- Confirm the canonical production URL and hosting configuration.
+- Confirm the production hostname, canonical URL and hosting configuration.
 - Verify route navigation, project links and legacy redirects.
 - Check responsive layouts and keyboard accessibility.
 - Review page metadata, canonical URLs, sitemap and robots output.
-- Validate public project descriptions and lifecycle statuses.
+- Validate public project descriptions, lifecycle statuses and destinations.
 - Finalize any required privacy and service terms based on actual operational practices.
-- Verify the production deployment and rollback path.
-- Keep production unchanged until the release has been deliberately approved.
+- Verify production deployment and rollback procedures.
+- Explicitly approve the release before changing production.
+
+A successful build or preview deployment is not, by itself, evidence that the website is production-ready.
 
 ## Guiding principles
 
