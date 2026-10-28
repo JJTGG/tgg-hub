@@ -1,26 +1,21 @@
 import type { Metadata } from "next";
-import { ProjectCard } from "@/components/project-card";
 import { ProjectCatalogue } from "@/components/project-catalogue";
 import { PROJECTS } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Ecosystem",
   description:
-    "Explore independent products, tools and experiments connected to TGG HUB by type, domain, lifecycle and relationship.",
+    "Explore independent products, tools and experiments connected to TGG HUB by type, domain and lifecycle.",
   alternates: {
     canonical: "/ecosystem"
   },
   openGraph: {
     title: "Ecosystem — TGG HUB",
     description:
-      "Browse TGG HUB's projects by type, domain, lifecycle and relationship.",
+      "Browse the products, tools and experiments connected to TGG HUB.",
     url: "/ecosystem"
   }
 };
-
-const featuredProjects = PROJECTS.filter(
-  (project) => project.featured
-);
 
 export default function EcosystemPage() {
   return (
@@ -37,39 +32,16 @@ export default function EcosystemPage() {
         </div>
       </section>
 
-      {featuredProjects.length > 0 && (
-        <section className="section section--compact">
-          <div className="container">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">Selected projects</p>
-                <h2>Start here.</h2>
-              </div>
-            </div>
-
-            <div className="project-grid">
-              {featuredProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  featured
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       <section className="section catalogue-section">
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">Browse all</p>
-              <h2>The project catalogue</h2>
+              <p className="eyebrow">Project index</p>
+              <h2>Find the work.</h2>
             </div>
             <p className="section-heading__copy">
-              Search by name or description, or narrow the
-              catalogue by type, domain, lifecycle or relationship.
+              Search by name or description, then narrow the
+              results by type, domain or current lifecycle.
             </p>
           </div>
 
