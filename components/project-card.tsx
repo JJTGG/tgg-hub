@@ -14,6 +14,9 @@ export function ProjectCard({
   project,
   featured = false
 }: ProjectCardProps) {
+  const destinations = project.destinations ?? [];
+  const hasRelationshipLabel = project.relationship !== "built";
+
   const cardClassName = [
     "project-card",
     featured ? "project-card--featured" : ""
@@ -43,9 +46,11 @@ export function ProjectCard({
           )}
 
           <div className="project-card__labels">
-            <span className="project-card__relationship">
-              {getProjectRelationshipLabel(project.relationship)}
-            </span>
+            {hasRelationshipLabel && (
+              <span className="project-card__relationship">
+                {getProjectRelationshipLabel(project.relationship)}
+              </span>
+            )}
             <span
               className={`status-badge status-badge--${project.status}`}
             >
@@ -56,7 +61,7 @@ export function ProjectCard({
 
         {featured && (
           <span className="project-card__featured-label">
-            Selected
+            Featured
           </span>
         )}
       </div>
@@ -82,10 +87,7 @@ export function ProjectCard({
       </div>
 
       <div className="project-card__bottom">
-        <div
-          className="project-card__categories"
-          aria-label="Project domains"
-        >
+        <div className="project-card__categories">
           {project.domains.length > 0 ? (
             project.domains.map((domain) => (
               <span
@@ -108,23 +110,30 @@ export function ProjectCard({
               className="text-link"
               href={`/projects/${project.slug}`}
             >
-              Project overview{" "}
+              Project overview
               <span aria-hidden="true">↗</span>
             </a>
           )}
 
-          {project.destinations?.map((destination) => (
+          {destinations.map((destination) => (
             <a
               className="text-link"
               href={destination.url}
               key={destination.url}
               target="_blank"
               rel="noreferrer"
+              aria-label={`${destination.label} (opens in a new tab)`}
             >
-              {destination.label}{" "}
+              {destination.label}
               <span aria-hidden="true">↗</span>
             </a>
           ))}
+
+          {!project.detail && destinations.length === 0 && (
+            <span className="project-card__unavailable">
+              No public destination yet
+            </span>
+          )}
         </div>
       </div>
     </article>
