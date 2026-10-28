@@ -18,6 +18,7 @@ import { ProjectCard } from "@/components/project-card";
 type Filter<T> = T | "all";
 
 const statusOptions: ProjectStatus[] = [
+  "planned",
   "available",
   "in-development",
   "experimental",
