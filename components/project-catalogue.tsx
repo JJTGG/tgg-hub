@@ -2,16 +2,20 @@
 
 import { useMemo, useState } from "react";
 import {
+  getProjectRelationshipLabel,
   getProjectStatusLabel,
-  PROJECT_CATEGORIES,
+  getProjectTypeLabel,
+  PROJECT_DOMAINS,
+  PROJECT_TYPE_LABELS,
   type Project,
-  type ProjectCategory,
-  type ProjectStatus
+  type ProjectDomain,
+  type ProjectRelationship,
+  type ProjectStatus,
+  type ProjectType
 } from "@/data/projects";
 import { ProjectCard } from "@/components/project-card";
 
-type StatusFilter = ProjectStatus | "all";
-type CategoryFilter = ProjectCategory | "all";
+type Filter<T> = T | "all";
 
 const statusOptions: ProjectStatus[] = [
   "available",
@@ -19,7 +23,18 @@ const statusOptions: ProjectStatus[] = [
   "experimental",
   "completed",
   "demo",
-  "maintained"
+  "maintained",
+  "retired"
+];
+
+const typeOptions = Object.keys(
+  PROJECT_TYPE_LABELS
+) as ProjectType[];
+
+const relationshipOptions: ProjectRelationship[] = [
+  "built",
+  "adopted",
+  "partner"
 ];
 
 export function ProjectCatalogue({
@@ -28,8 +43,20 @@ export function ProjectCatalogue({
   projects: Project[];
 }) {
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<StatusFilter>("all");
-  const [category, setCategory] = useState<CategoryFilter>("all");
+  const [status, setStatus] =
+    useState<Filter<ProjectStatus>>("all");
+  const [type, setType] =
+    useState<Filter<ProjectType>>("all");
+  const [domain, setDomain] =
+    useState<Filter<ProjectDomain>>("all");
+  const [relationship, setRelationship] =
+    useState<Filter<ProjectRelationship>>("all");
+
+  const usedDomains = PROJECT_DOMAINS.filter((candidate) =>
+    projects.some((project) =>
+      project.domains.includes(candidate)
+    )
+  );
 
   const filteredProjects = useMemo(() => {
     const query = search.trim().toLocaleLowerCase();
@@ -38,33 +65,57 @@ export function ProjectCatalogue({
       const matchesStatus =
         status === "all" || project.status === status;
 
-      const matchesCategory =
-        category === "all" || project.categories.includes(category);
+      const matchesType =
+        type === "all" || project.type === type;
+
+      const matchesDomain =
+        domain === "all" || project.domains.includes(domain);
+
+      const matchesRelationship =
+        relationship === "all" ||
+        project.relationship === relationship;
 
       const searchableContent = [
         project.name,
         project.summary,
-        ...project.categories
-      ].join(" ").toLocaleLowerCase();
+        getProjectTypeLabel(project.type),
+        getProjectStatusLabel(project.status),
+        getProjectRelationshipLabel(project.relationship),
+        ...project.domains
+      ]
+        .join(" ")
+        .toLocaleLowerCase();
 
-      const matchesSearch =
-        !query || searchableContent.includes(query);
-
-      return matchesStatus && matchesCategory && matchesSearch;
+      return (
+        matchesStatus &&
+        matchesType &&
+        matchesDomain &&
+        matchesRelationship &&
+        (!query || searchableContent.includes(query))
+      );
     });
-  }, [projects, search, status, category]);
-
-  const usedCategories = PROJECT_CATEGORIES.filter((candidate) =>
-    projects.some((project) => project.categories.includes(candidate))
-  );
+  }, [
+    projects,
+    search,
+    status,
+    type,
+    domain,
+    relationship
+  ]);
 
   const filtersActive =
-    search.trim() !== "" || status !== "all" || category !== "all";
+    Boolean(search.trim()) ||
+    status !== "all" ||
+    type !== "all" ||
+    domain !== "all" ||
+    relationship !== "all";
 
   function clearFilters() {
     setSearch("");
     setStatus("all");
-    setCategory("all");
+    setType("all");
+    setDomain("all");
+    setRelationship("all");
   }
 
   return (
@@ -76,17 +127,57 @@ export function ProjectCatalogue({
             type="search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Search names, descriptions or categories"
+            placeholder="Search names, descriptions, types or domains"
           />
         </label>
 
-        <div className="catalogue__selects">
+        <div className="catalogue__selects catalogue__selects--four">
           <label className="catalogue__filter">
-            <span>Status</span>
+            <span>Type</span>
+            <select
+              value={type}
+              onChange={(event) =>
+                setType(
+                  event.target.value as Filter<ProjectType>
+                )
+              }
+            >
+              <option value="all">All types</option>
+              {typeOptions.map((item) => (
+                <option key={item} value={item}>
+                  {getProjectTypeLabel(item)}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="catalogue__filter">
+            <span>Domain</span>
+            <select
+              value={domain}
+              onChange={(event) =>
+                setDomain(
+                  event.target.value as Filter<ProjectDomain>
+                )
+              }
+            >
+              <option value="all">All domains</option>
+              {usedDomains.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="catalogue__filter">
+            <span>Lifecycle</span>
             <select
               value={status}
               onChange={(event) =>
-                setStatus(event.target.value as StatusFilter)
+                setStatus(
+                  event.target.value as Filter<ProjectStatus>
+                )
               }
             >
               <option value="all">All statuses</option>
@@ -99,17 +190,19 @@ export function ProjectCatalogue({
           </label>
 
           <label className="catalogue__filter">
-            <span>Category</span>
+            <span>Relationship</span>
             <select
-              value={category}
+              value={relationship}
               onChange={(event) =>
-                setCategory(event.target.value as CategoryFilter)
+                setRelationship(
+                  event.target.value as Filter<ProjectRelationship>
+                )
               }
             >
-              <option value="all">All categories</option>
-              {usedCategories.map((item) => (
+              <option value="all">All relationships</option>
+              {relationshipOptions.map((item) => (
                 <option key={item} value={item}>
-                  {item}
+                  {getProjectRelationshipLabel(item)}
                 </option>
               ))}
             </select>
@@ -144,11 +237,11 @@ export function ProjectCatalogue({
           ))}
         </div>
       ) : (
-        <div className="catalogue__empty">
+        <div className="catalogue__empty" role="status">
           <h3>No matching projects</h3>
           <p>
-            Try a different search or clear the filters to see the
-            full catalogue.
+            Try another search or clear the filters to see
+            the full catalogue.
           </p>
           <button
             className="button button--secondary"
