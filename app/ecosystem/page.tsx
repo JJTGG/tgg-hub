@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { ProjectCatalogue } from "@/components/project-catalogue";
 import { PROJECTS } from "@/data/projects";
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 export default function EcosystemPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero page-hero--catalogue">
         <div className="container page-hero__inner">
           <p className="eyebrow">The ecosystem</p>
           <h1>Independent work, in one place.</h1>
@@ -32,19 +33,8 @@ export default function EcosystemPage() {
         </div>
       </section>
 
-      <section className="section catalogue-section">
+      <section className="section catalogue-section catalogue-section--compact">
         <div className="container">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Project index</p>
-              <h2>Find the work.</h2>
-            </div>
-            <p className="section-heading__copy">
-              Search by name or description, then narrow the
-              results by type, domain or current lifecycle.
-            </p>
-          </div>
-
           <ProjectCatalogue projects={PROJECTS} />
         </div>
       </section>
