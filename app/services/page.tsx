@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   }
 };
 
+const contactEmail = "tgghub.official@gmail.com";
+
 const serviceGroups = [
   {
     heading: "Websites and landing pages",
@@ -100,13 +102,19 @@ const addOns = [
   "Additional revision rounds"
 ];
 
+function serviceEnquiryUrl(serviceName: string) {
+  return `mailto:${contactEmail}?subject=${encodeURIComponent(
+    `Enquiry: ${serviceName}`
+  )}`;
+}
+
 export default function ServicesPage() {
   return (
     <main>
       <section className="page-hero">
         <div className="container page-hero__inner">
           <p className="eyebrow">
-            Digital Services &amp; Business Development
+            Digital services and business development
           </p>
           <h1>Let's build something useful.</h1>
           <p>
@@ -118,12 +126,19 @@ export default function ServicesPage() {
           <div className="button-row">
             <a
               className="button button--primary"
-              href="mailto:tgghub.official@gmail.com?subject=Digital%20services%20enquiry"
+              href={`mailto:${contactEmail}?subject=Digital%20services%20enquiry`}
             >
-              Discuss a project{" "}
+              Discuss a project
               <span aria-hidden="true">↗</span>
             </a>
           </div>
+
+          <p className="service-contact-fallback">
+            Prefer to email directly?{" "}
+            <a href={`mailto:${contactEmail}`}>
+              {contactEmail}
+            </a>
+          </p>
         </div>
       </section>
 
@@ -168,10 +183,10 @@ export default function ServicesPage() {
                       </div>
 
                       <a
-                        href={`mailto:tgghub.official@gmail.com?subject=${encodeURIComponent(`Enquiry: ${service.name}`)}`}
+                        href={serviceEnquiryUrl(service.name)}
                         aria-label={`Enquire about ${service.name}`}
                       >
-                        Enquire{" "}
+                        Enquire
                         <span aria-hidden="true">↗</span>
                       </a>
                     </article>
@@ -247,9 +262,9 @@ export default function ServicesPage() {
 
           <a
             className="button button--on-blue"
-            href="mailto:tgghub.official@gmail.com?subject=Digital%20services%20enquiry"
+            href={`mailto:${contactEmail}?subject=Digital%20services%20enquiry`}
           >
-            Enquire about a project{" "}
+            Enquire about a project
             <span aria-hidden="true">↗</span>
           </a>
         </div>
