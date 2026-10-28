@@ -1,17 +1,16 @@
-
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about TGG HUB and its approach to independent products, useful experiments and a growing ecosystem.",
+    "Learn about TGG HUB's evolution from a Web3 community presence into a wider technology ecosystem.",
   alternates: {
     canonical: "/about"
   },
   openGraph: {
     title: "About — TGG HUB",
     description:
-      "Learn about TGG HUB and its approach to independent products, useful experiments and a growing ecosystem.",
+      "TGG HUB connects independent projects while preserving their identities and lifecycles.",
     url: "/about"
   }
 };
@@ -22,10 +21,11 @@ export default function AboutPage() {
       <section className="page-hero">
         <div className="container page-hero__inner">
           <p className="eyebrow">About TGG HUB</p>
-          <h1>A home for independent work.</h1>
+          <h1>A wider ecosystem, built from an earlier community.</h1>
           <p>
-            TGG HUB is the ecosystem layer connecting the products,
-            tools and experiments being built under TGG.
+            TGG HUB has expanded beyond its original Web3 community
+            presence into a home for independent products, tools,
+            experiments and technology initiatives.
           </p>
         </div>
       </section>
@@ -33,19 +33,23 @@ export default function AboutPage() {
       <section className="section editorial-section">
         <div className="container editorial-layout">
           <div className="editorial-heading">
-            <p className="eyebrow">01 / The evolution</p>
-            <h2>From early community roots to an ecosystem.</h2>
+            <p className="eyebrow">01 / The beginning</p>
+            <h2>Community, learning and genuine connections.</h2>
           </div>
+
           <div className="editorial-copy">
             <p>
-              TGG HUB has evolved from its earlier online community roots
-              into a broader home for independent products and projects.
-              The work is no longer defined by one website or a single
-              application.
+              TGG HUB began in the Web3 community era, with
+              participation, project discovery, insights, personal
+              growth and connections among people who shared an
+              interest in the space. Its earlier online presence
+              also included PFP-related work and community pages.
             </p>
             <p>
-              The ecosystem grows as ideas turn into experiments, products
-              become usable, and projects find their own direction.
+              That history matters. The current ecosystem builds
+              on the experience without pretending every old
+              initiative remains active or recreating the earlier
+              website as its technical foundation.
             </p>
           </div>
         </div>
@@ -54,21 +58,23 @@ export default function AboutPage() {
       <section className="section editorial-section editorial-section--bordered">
         <div className="container editorial-layout">
           <div className="editorial-heading">
-            <p className="eyebrow">02 / The model</p>
-            <h2>Connected, not combined.</h2>
+            <p className="eyebrow">02 / The evolution</p>
+            <h2>Growing beyond one technology domain.</h2>
           </div>
+
           <div className="editorial-copy">
             <p>
-              Projects connected to TGG HUB can maintain their own
-              repositories, domains, interfaces, technologies and
-              development lifecycles.
+              The ecosystem now spans independent products,
+              technical tools, experiments and digital solutions.
+              Web3 remains part of the identity, but it is one
+              domain among several—not a limit on the work that
+              may belong here.
             </p>
             <p>
-              TGG HUB provides the shared ecosystem presence without
-              requiring every project to use the same stack or become
-              part of one codebase. Projects can also be adopted or
-              supported without implying that TGG HUB originally
-              created them.
+              Each project can maintain its own purpose,
+              repository, deployment and development lifecycle.
+              The hub connects the work without requiring every
+              initiative to become a single application.
             </p>
           </div>
         </div>
@@ -78,8 +84,8 @@ export default function AboutPage() {
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">03 / Principles</p>
-              <h2>Built with intent.</h2>
+              <p className="eyebrow">03 / The operating model</p>
+              <h2>Connected, not combined.</h2>
             </div>
           </div>
 
@@ -88,24 +94,26 @@ export default function AboutPage() {
               <span>01</span>
               <h3>Independence</h3>
               <p>
-                Give each project room to evolve according to its own
-                purpose and needs.
+                Projects retain their own purpose, repository,
+                deployment and technical choices.
               </p>
             </article>
+
             <article>
               <span>02</span>
               <h3>Utility</h3>
               <p>
-                Prioritize products and experiments that have a clear
-                purpose and meaningful value.
+                Products and experiments should have a clear
+                reason to exist.
               </p>
             </article>
+
             <article>
               <span>03</span>
               <h3>Evolution</h3>
               <p>
-                Grow the ecosystem by adding meaningful pieces without
-                making everything one thing.
+                The ecosystem can grow without forcing every
+                initiative into one application.
               </p>
             </article>
           </div>
