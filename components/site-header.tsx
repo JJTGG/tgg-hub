@@ -92,4 +92,4 @@ export function SiteHeader() {
       </div>
     </header>
   );
-}feat(theme): add theme switcher and active navigation
+}
