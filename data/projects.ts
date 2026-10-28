@@ -1,8 +1,4 @@
-
-export type ProjectRelationship =
-  | "built"
-  | "adopted"
-  | "partner";
+export type ProjectRelationship = "built" | "adopted" | "partner";
 
 export type ProjectStatus =
   | "available"
@@ -13,16 +9,30 @@ export type ProjectStatus =
   | "maintained"
   | "retired";
 
-export type ProjectCategory =
-  | "Product"
-  | "Trading"
+export type ProjectType =
+  | "product"
+  | "tool"
+  | "experiment"
+  | "infrastructure"
+  | "demo"
+  | "project";
+
+export type ProjectDomain =
   | "AI"
-  | "Gaming"
-  | "Commerce"
-  | "Developer tools"
-  | "Experiments"
   | "Automation"
-  | "Productivity";
+  | "Commerce"
+  | "Community & social"
+  | "Developer tools"
+  | "Gaming"
+  | "Infrastructure"
+  | "Productivity"
+  | "Trading"
+  | "Web3";
+
+export type ProjectDestination = {
+  label: string;
+  url: string;
+};
 
 export type ProjectDetail = {
   introduction: string;
@@ -38,9 +48,11 @@ export type Project = {
   name: string;
   mark: string;
   summary: string;
+  type: ProjectType;
   relationship: ProjectRelationship;
   status: ProjectStatus;
-  categories: ProjectCategory[];
+  domains: ProjectDomain[];
+  destinations?: ProjectDestination[];
   featured?: boolean;
   logo?: string;
   coverImage?: string;
@@ -63,16 +75,26 @@ export const RELATIONSHIP_LABELS: Record<ProjectRelationship, string> = {
   partner: "Partner project"
 };
 
-export const PROJECT_CATEGORIES: ProjectCategory[] = [
+export const PROJECT_TYPE_LABELS: Record<ProjectType, string> = {
+  product: "Product",
+  tool: "Tool",
+  experiment: "Experiment",
+  infrastructure: "Infrastructure",
+  demo: "Demo project",
+  project: "Project"
+};
+
+export const PROJECT_DOMAINS: ProjectDomain[] = [
   "AI",
   "Automation",
   "Commerce",
+  "Community & social",
   "Developer tools",
-  "Experiments",
   "Gaming",
-  "Product",
+  "Infrastructure",
   "Productivity",
-  "Trading"
+  "Trading",
+  "Web3"
 ];
 
 export const PROJECTS: Project[] = [
@@ -82,10 +104,11 @@ export const PROJECTS: Project[] = [
     name: "Agoré",
     mark: "AG",
     summary:
-      "The first version of Agoré is complete. Its product description and public destination need to be verified before a fuller public presentation.",
+      "The first version of Agoré is complete. A fuller public description and official destination still need to be verified.",
+    type: "product",
     relationship: "built",
     status: "completed",
-    categories: ["Product"]
+    domains: ["Community & social"]
   },
   {
     id: "trading-tools",
@@ -94,9 +117,10 @@ export const PROJECTS: Project[] = [
     mark: "TT",
     summary:
       "A trading decision-support workspace for learning, analysis, planning, risk management and review.",
+    type: "product",
     relationship: "built",
     status: "available",
-    categories: ["Trading", "Productivity"],
+    domains: ["Trading", "Productivity"],
     featured: true,
     detail: {
       introduction:
@@ -122,9 +146,10 @@ export const PROJECTS: Project[] = [
     mark: "AI",
     summary:
       "A multi-model AI workspace designed to bring different model experiences into one place.",
+    type: "product",
     relationship: "built",
     status: "available",
-    categories: ["AI", "Developer tools"],
+    domains: ["AI", "Developer tools"],
     featured: true,
     detail: {
       introduction:
@@ -150,9 +175,10 @@ export const PROJECTS: Project[] = [
     mark: "CTU",
     summary:
       "A game top-up platform under development, focused on a dependable purchase and fulfillment experience.",
+    type: "product",
     relationship: "built",
     status: "in-development",
-    categories: ["Gaming", "Commerce"],
+    domains: ["Gaming", "Commerce"],
     detail: {
       introduction:
         "ClutchTopUp is a standalone product being developed for game top-ups, with its own catalog, ordering, payments and fulfillment lifecycle.",
@@ -176,10 +202,11 @@ export const PROJECTS: Project[] = [
     name: "NEXVARIN",
     mark: "NX",
     summary:
-      "An independent product currently under development within the TGG HUB ecosystem.",
+      "An infrastructure initiative under development; proposed capabilities must not be presented as already delivered.",
+    type: "infrastructure",
     relationship: "built",
     status: "in-development",
-    categories: ["Product"]
+    domains: ["Infrastructure"]
   },
   {
     id: "craftmish",
@@ -187,10 +214,11 @@ export const PROJECTS: Project[] = [
     name: "Craftmish",
     mark: "CM",
     summary:
-      "A standalone project under development, with its own product direction and technical choices.",
+      "A standalone project under development. More specific public details await portfolio review.",
+    type: "project",
     relationship: "built",
     status: "in-development",
-    categories: ["Product"]
+    domains: []
   },
   {
     id: "meayu",
@@ -198,10 +226,11 @@ export const PROJECTS: Project[] = [
     name: "Meayu",
     mark: "MY",
     summary:
-      "An independent product being developed within the TGG HUB ecosystem.",
+      "An independent project under development. Its public domain and product description need further verification.",
+    type: "project",
     relationship: "built",
     status: "in-development",
-    categories: ["Product"]
+    domains: []
   },
   {
     id: "vortyx",
@@ -210,9 +239,10 @@ export const PROJECTS: Project[] = [
     mark: "VX",
     summary:
       "An experimental proactivity engine exploring deterministic rules, constraints and replaceable model suggestions.",
+    type: "experiment",
     relationship: "built",
     status: "experimental",
-    categories: ["Developer tools", "Experiments"],
+    domains: ["Developer tools"],
     detail: {
       introduction:
         "Vortyx is an experimental system-behavior playground for a proactivity engine. It explores how deterministic behavior can govern where model-generated suggestions are permitted to act.",
@@ -236,10 +266,11 @@ export const PROJECTS: Project[] = [
     name: "Trading Signal Dropper",
     mark: "TSD",
     summary:
-      "A bot project focused on publishing trading signals through its intended channels.",
+      "An automation project focused on publishing trading signals through its intended channels.",
+    type: "tool",
     relationship: "built",
     status: "in-development",
-    categories: ["Trading", "Automation"]
+    domains: ["Trading", "Automation"]
   },
   {
     id: "testing-ground",
@@ -247,10 +278,11 @@ export const PROJECTS: Project[] = [
     name: "Testing Ground",
     mark: "TG",
     summary:
-      "An experimental environment for testing ideas and behavior before treating them as finished products.",
+      "An experimental environment for testing ideas and behaviour before treating them as finished products.",
+    type: "experiment",
     relationship: "built",
     status: "experimental",
-    categories: ["Experiments", "Developer tools"]
+    domains: ["Developer tools"]
   },
   {
     id: "fake-os",
@@ -259,9 +291,10 @@ export const PROJECTS: Project[] = [
     mark: "OS",
     summary:
       "An operating-system-style interface experiment explored as a standalone project.",
+    type: "experiment",
     relationship: "built",
     status: "experimental",
-    categories: ["Experiments", "Developer tools"]
+    domains: ["Developer tools"]
   },
   {
     id: "auren-store",
@@ -270,9 +303,10 @@ export const PROJECTS: Project[] = [
     mark: "AS",
     summary:
       "A storefront demo exploring the presentation and flow of an online shopping experience.",
+    type: "demo",
     relationship: "built",
     status: "demo",
-    categories: ["Commerce", "Experiments"]
+    domains: ["Commerce"]
   }
 ];
 
@@ -297,8 +331,18 @@ function validateProjects(projects: readonly Project[]): void {
       throw new Error(`Missing name or summary for project: ${project.id}`);
     }
 
-    if (project.categories.length === 0) {
-      throw new Error(`Project has no categories: ${project.id}`);
+    if (!(project.type in PROJECT_TYPE_LABELS)) {
+      throw new Error(`Invalid project type for project: ${project.id}`);
+    }
+
+    if (
+      project.destinations?.some(
+        (destination) => !/^https:\/\//i.test(destination.url)
+      )
+    ) {
+      throw new Error(
+        `Project destinations must use HTTPS: ${project.id}`
+      );
     }
 
     ids.add(project.id);
@@ -308,11 +352,15 @@ function validateProjects(projects: readonly Project[]): void {
 
 validateProjects(PROJECTS);
 
-export function getProjectBySlug(slug: string): Project | undefined {
+export function getProjectBySlug(
+  slug: string
+): Project | undefined {
   return PROJECTS.find((project) => project.slug === slug);
 }
 
-export function getProjectStatusLabel(status: ProjectStatus): string {
+export function getProjectStatusLabel(
+  status: ProjectStatus
+): string {
   return STATUS_LABELS[status];
 }
 
@@ -320,4 +368,10 @@ export function getProjectRelationshipLabel(
   relationship: ProjectRelationship
 ): string {
   return RELATIONSHIP_LABELS[relationship];
+}
+
+export function getProjectTypeLabel(
+  type: ProjectType
+): string {
+  return PROJECT_TYPE_LABELS[type];
 }
