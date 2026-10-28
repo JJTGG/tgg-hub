@@ -1,7 +1,7 @@
-
 import {
   getProjectRelationshipLabel,
   getProjectStatusLabel,
+  getProjectTypeLabel,
   type Project
 } from "@/data/projects";
 
@@ -14,13 +14,15 @@ export function ProjectCard({
   project,
   featured = false
 }: ProjectCardProps) {
+  const cardClassName = [
+    "project-card",
+    featured ? "project-card--featured" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <article
-      className={[
-        "project-card",
-        featured ? "project-card--featured" : ""
-      ].filter(Boolean).join(" ")}
-    >
+    <article className={cardClassName}>
       <div className="project-card__top">
         <div className="project-card__identity">
           {project.logo ? (
@@ -32,7 +34,10 @@ export function ProjectCard({
               height={48}
             />
           ) : (
-            <span className="project-card__mark" aria-hidden="true">
+            <span
+              className="project-card__mark"
+              aria-hidden="true"
+            >
               {project.mark}
             </span>
           )}
@@ -41,18 +46,26 @@ export function ProjectCard({
             <span className="project-card__relationship">
               {getProjectRelationshipLabel(project.relationship)}
             </span>
-            <span className={`status-badge status-badge--${project.status}`}>
+            <span
+              className={`status-badge status-badge--${project.status}`}
+            >
               {getProjectStatusLabel(project.status)}
             </span>
           </div>
         </div>
 
         {featured && (
-          <span className="project-card__featured-label">Selected</span>
+          <span className="project-card__featured-label">
+            Selected
+          </span>
         )}
       </div>
 
       <div className="project-card__content">
+        <p className="project-type-label">
+          {getProjectTypeLabel(project.type)}
+        </p>
+
         <h3 className="project-card__title">
           {project.detail ? (
             <a href={`/projects/${project.slug}`}>
@@ -63,27 +76,56 @@ export function ProjectCard({
           )}
         </h3>
 
-        <p className="project-card__summary">{project.summary}</p>
+        <p className="project-card__summary">
+          {project.summary}
+        </p>
       </div>
 
       <div className="project-card__bottom">
-        <div className="project-card__categories" aria-label="Project categories">
-          {project.categories.slice(0, 2).map((category) => (
-            <span className="category-label" key={category}>
-              {category}
+        <div
+          className="project-card__categories"
+          aria-label="Project domains"
+        >
+          {project.domains.length > 0 ? (
+            project.domains.map((domain) => (
+              <span
+                className="category-label"
+                key={domain}
+              >
+                {domain}
+              </span>
+            ))
+          ) : (
+            <span className="category-label category-label--muted">
+              Domain review pending
             </span>
-          ))}
+          )}
         </div>
 
-        {project.detail && (
-          <a
-            className="text-link"
-            href={`/projects/${project.slug}`}
-            aria-label={`Read the ${project.name} overview`}
-          >
-            Project overview <span aria-hidden="true">↗</span>
-          </a>
-        )}
+        <div className="project-card__actions">
+          {project.detail && (
+            <a
+              className="text-link"
+              href={`/projects/${project.slug}`}
+            >
+              Project overview{" "}
+              <span aria-hidden="true">↗</span>
+            </a>
+          )}
+
+          {project.destinations?.map((destination) => (
+            <a
+              className="text-link"
+              href={destination.url}
+              key={destination.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {destination.label}{" "}
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
       </div>
     </article>
   );
