@@ -52,27 +52,43 @@ jobs:
           const outputDir = path.resolve("out");
           const expectedOrigin = process.env.TGG_HUB_SITE_URL;
 
+          if (!expectedOrigin) {
+            throw new Error("TGG_HUB_SITE_URL is not configured.");
+          }
+
           if (!fs.existsSync(outputDir)) {
-            throw new Error("Static export directory 'out' was not created.");
+            throw new Error(
+              "Static export directory 'out' was not created."
+            );
           }
 
           function walk(directory) {
-            return fs.readdirSync(directory, { withFileTypes: true })
-              .flatMap((entry) => {
-                const fullPath = path.join(directory, entry.name);
-                return entry.isDirectory() ? walk(fullPath) : [fullPath];
-              });
+            return fs.readdirSync(directory, {
+              withFileTypes: true
+            }).flatMap((entry) => {
+              const fullPath = path.join(directory, entry.name);
+
+              return entry.isDirectory()
+                ? walk(fullPath)
+                : [fullPath];
+            });
           }
 
           const htmlFiles = walk(outputDir)
             .filter((file) => file.endsWith(".html"))
-            .filter((file) =>
-              path.relative(outputDir, file)
-                .split(path.sep).join("/") !== "404.html"
-            );
+            .filter((file) => {
+              const relativePath = path.relative(outputDir, file)
+                .split(path.sep)
+                .join("/");
+
+              return relativePath !== "404.html" &&
+                relativePath !== "_not-found.html";
+            });
 
           if (htmlFiles.length === 0) {
-            throw new Error("No exported HTML pages were found.");
+            throw new Error(
+              "No public HTML pages were found in the static export."
+            );
           }
 
           function getTag(html, tagName, attribute, value) {
@@ -105,12 +121,21 @@ jobs:
 
           for (const file of htmlFiles) {
             const relativePath = path.relative(outputDir, file)
-              .split(path.sep).join("/");
+              .split(path.sep)
+              .join("/");
+
             const html = fs.readFileSync(file, "utf8");
 
-            const robotsTag = getTag(html, "meta", "name", "robots");
+            const robotsTag = getTag(
+              html,
+              "meta",
+              "name",
+              "robots"
+            );
+
             const robotsContent =
               getAttribute(robotsTag, "content") || "";
+
             const directives = robotsContent.toLowerCase()
               .split(",")
               .map((item) => item.trim());
@@ -124,10 +149,17 @@ jobs:
               );
             }
 
-            const canonicalTag =
-              getTag(html, "link", "rel", "canonical");
-            const canonicalHref =
-              getAttribute(canonicalTag, "href");
+            const canonicalTag = getTag(
+              html,
+              "link",
+              "rel",
+              "canonical"
+            );
+
+            const canonicalHref = getAttribute(
+              canonicalTag,
+              "href"
+            );
 
             if (!canonicalHref) {
               throw new Error(
@@ -135,10 +167,19 @@ jobs:
               );
             }
 
-            const canonical = new URL(
-              canonicalHref,
-              expectedOrigin
-            );
+            let canonical;
+
+            try {
+              canonical = new URL(
+                canonicalHref,
+                expectedOrigin
+              );
+            } catch {
+              throw new Error(
+                `Invalid canonical URL in ${relativePath}: ${canonicalHref}`
+              );
+            }
+
             const withoutExtension =
               relativePath.replace(/\.html$/, "");
 
@@ -157,8 +198,15 @@ jobs:
             }
           }
 
-          const robotsFile = path.join(outputDir, "robots.txt");
-          const sitemapFile = path.join(outputDir, "sitemap.xml");
+          const robotsFile = path.join(
+            outputDir,
+            "robots.txt"
+          );
+
+          const sitemapFile = path.join(
+            outputDir,
+            "sitemap.xml"
+          );
 
           if (
             !fs.existsSync(robotsFile) ||
@@ -169,18 +217,33 @@ jobs:
             );
           }
 
-          const robotsText = fs.readFileSync(robotsFile, "utf8");
-          const sitemapText = fs.readFileSync(sitemapFile, "utf8");
-          const expectedSitemap = `${expectedOrigin}/sitemap.xml`;
+          const robotsText = fs.readFileSync(
+            robotsFile,
+            "utf8"
+          );
 
-          if (!robotsText.includes(`Sitemap: ${expectedSitemap}`)) {
+          const sitemapText = fs.readFileSync(
+            sitemapFile,
+            "utf8"
+          );
+
+          const expectedSitemap =
+            `${expectedOrigin}/sitemap.xml`;
+
+          if (
+            !robotsText.includes(
+              `Sitemap: ${expectedSitemap}`
+            )
+          ) {
             throw new Error(
               "robots.txt points to the wrong sitemap URL."
             );
           }
 
           const locations = [
-            ...sitemapText.matchAll(/<loc>(.*?)<\/loc>/g)
+            ...sitemapText.matchAll(
+              /<loc>(.*?)<\/loc>/g
+            )
           ].map((match) => match[1]);
 
           if (locations.length === 0) {
@@ -190,7 +253,17 @@ jobs:
           }
 
           for (const location of locations) {
-            if (new URL(location).origin !== expectedOrigin) {
+            let url;
+
+            try {
+              url = new URL(location);
+            } catch {
+              throw new Error(
+                `Invalid sitemap URL: ${location}`
+              );
+            }
+
+            if (url.origin !== expectedOrigin) {
               throw new Error(
                 `Sitemap contains an unexpected URL: ${location}`
               );
@@ -198,8 +271,9 @@ jobs:
           }
 
           console.log(
-            `Verified noindex/nofollow and canonical URLs for ${htmlFiles.length} pages.`
+            `Verified noindex/nofollow and canonical URLs for ${htmlFiles.length} public HTML pages.`
           );
+
           console.log(
             `Verified robots.txt and ${locations.length} sitemap URLs.`
           );
