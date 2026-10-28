@@ -17,10 +17,10 @@ import { ProjectCard } from "@/components/project-card";
 
 type Filter<T> = T | "all";
 
-const statusOptions: ProjectStatus[] = [
-  "planned",
+const statusOrder: ProjectStatus[] = [
   "available",
   "in-development",
+  "planned",
   "experimental",
   "completed",
   "demo",
@@ -28,15 +28,18 @@ const statusOptions: ProjectStatus[] = [
   "retired"
 ];
 
-const typeOptions = Object.keys(
-  PROJECT_TYPE_LABELS
-) as ProjectType[];
-
-const relationshipOptions: ProjectRelationship[] = [
+const relationshipOrder: ProjectRelationship[] = [
   "built",
   "adopted",
   "partner"
 ];
+
+function normalizeSearchText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase();
+}
 
 export function ProjectCatalogue({
   projects
@@ -59,8 +62,25 @@ export function ProjectCatalogue({
     )
   );
 
+  const typeOptions = (
+    Object.keys(PROJECT_TYPE_LABELS) as ProjectType[]
+  ).filter((candidate) =>
+    projects.some((project) => project.type === candidate)
+  );
+
+  const statusOptions = statusOrder.filter((candidate) =>
+    projects.some((project) => project.status === candidate)
+  );
+
+  const relationshipOptions = relationshipOrder.filter(
+    (candidate) =>
+      projects.some(
+        (project) => project.relationship === candidate
+      )
+  );
+
   const filteredProjects = useMemo(() => {
-    const query = search.trim().toLocaleLowerCase();
+    const query = normalizeSearchText(search.trim());
 
     return projects.filter((project) => {
       const matchesStatus =
@@ -76,16 +96,16 @@ export function ProjectCatalogue({
         relationship === "all" ||
         project.relationship === relationship;
 
-      const searchableContent = [
-        project.name,
-        project.summary,
-        getProjectTypeLabel(project.type),
-        getProjectStatusLabel(project.status),
-        getProjectRelationshipLabel(project.relationship),
-        ...project.domains
-      ]
-        .join(" ")
-        .toLocaleLowerCase();
+      const searchableContent = normalizeSearchText(
+        [
+          project.name,
+          project.summary,
+          getProjectTypeLabel(project.type),
+          getProjectStatusLabel(project.status),
+          getProjectRelationshipLabel(project.relationship),
+          ...project.domains
+        ].join(" ")
+      );
 
       return (
         matchesStatus &&
@@ -128,11 +148,12 @@ export function ProjectCatalogue({
             type="search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Search names, descriptions, types or domains"
+            placeholder="Try Agore, AI, trading or gaming"
+            autoComplete="off"
           />
         </label>
 
-        <div className="catalogue__selects catalogue__selects--four">
+        <div className="catalogue__selects">
           <label className="catalogue__filter">
             <span>Type</span>
             <select
@@ -190,31 +211,38 @@ export function ProjectCatalogue({
             </select>
           </label>
 
-          <label className="catalogue__filter">
-            <span>Relationship</span>
-            <select
-              value={relationship}
-              onChange={(event) =>
-                setRelationship(
-                  event.target.value as Filter<ProjectRelationship>
-                )
-              }
-            >
-              <option value="all">All relationships</option>
-              {relationshipOptions.map((item) => (
-                <option key={item} value={item}>
-                  {getProjectRelationshipLabel(item)}
-                </option>
-              ))}
-            </select>
-          </label>
+          {relationshipOptions.length > 1 && (
+            <label className="catalogue__filter">
+              <span>Relationship</span>
+              <select
+                value={relationship}
+                onChange={(event) =>
+                  setRelationship(
+                    event.target.value as Filter<ProjectRelationship>
+                  )
+                }
+              >
+                <option value="all">All relationships</option>
+                {relationshipOptions.map((item) => (
+                  <option key={item} value={item}>
+                    {getProjectRelationshipLabel(item)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
         </div>
       </div>
 
       <div className="catalogue__results">
-        <p role="status" aria-live="polite">
-          {filteredProjects.length}{" "}
-          {filteredProjects.length === 1 ? "project" : "projects"}
+        <p
+          id="catalogue-results"
+          role="status"
+          aria-live="polite"
+        >
+          {filteredProjects.length === projects.length
+            ? `${projects.length} projects`
+            : `Showing ${filteredProjects.length} of ${projects.length} projects`}
         </p>
 
         {filtersActive && (
@@ -241,7 +269,7 @@ export function ProjectCatalogue({
         <div className="catalogue__empty" role="status">
           <h3>No matching projects</h3>
           <p>
-            Try another search or clear the filters to see
+            Try a different search or clear the filters to see
             the full catalogue.
           </p>
           <button
