@@ -17,6 +17,13 @@ export const metadata: Metadata = {
     template: "%s — TGG HUB"
   },
   description: SITE_DESCRIPTION,
+  robots:
+    process.env.TGG_HUB_NOINDEX === "true"
+      ? {
+          index: false,
+          follow: false
+        }
+      : undefined,
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
