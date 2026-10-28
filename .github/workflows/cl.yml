@@ -1,3 +1,4 @@
+
 name: TGG HUB Cloudflare Preview
 
 on:
@@ -6,7 +7,7 @@ on:
       - revamp/tgg-hub-v2
 
 permissions:
-  contents: write
+  contents: read
   deployments: write
 
 concurrency:
@@ -23,51 +24,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
         with:
-          persist-credentials: true
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 22
-
-      - name: Normalize dependency and TypeScript configuration
-        run: |
-          node <<'NODE'
-          const fs = require("node:fs");
-
-          const packagePath = "package.json";
-          const packageJson = JSON.parse(
-            fs.readFileSync(packagePath, "utf8")
-          );
-
-          packageJson.devDependencies ??= {};
-
-          if (packageJson.devDependencies.wrangler !== "4.154.0") {
-            packageJson.devDependencies.wrangler = "4.154.0";
-
-            fs.writeFileSync(
-              packagePath,
-              `${JSON.stringify(packageJson, null, 2)}\n`
-            );
-          }
-
-          const tsconfigPath = "tsconfig.json";
-          const tsconfig = JSON.parse(
-            fs.readFileSync(tsconfigPath, "utf8")
-          );
-
-          if (tsconfig.compilerOptions?.jsx === "preserve") {
-            tsconfig.compilerOptions.jsx = "react-jsx";
-
-            fs.writeFileSync(
-              tsconfigPath,
-              `${JSON.stringify(tsconfig, null, 2)}\n`
-            );
-          }
-          NODE
-
-      - name: Generate or refresh dependency lockfile
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          cache: npm
 
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
@@ -78,29 +41,130 @@ jobs:
           TGG_HUB_NOINDEX: "true"
         run: npm run build
 
-      - name: Commit dependency and configuration updates
+      - name: Check source diff formatting
+        run: git diff --check
+
+      - name: Verify preview metadata in static output
+        env:
+          TGG_HUB_SITE_URL: https://revamp-preview.tgg-hub-revamp-preview.pages.dev
         run: |
-          git diff --check
+          node <<'NODE'
+          const fs = require("node:fs");
+          const path = require("node:path");
 
-          git add package.json package-lock.json tsconfig.json
+          const outputDir = path.resolve("out");
+          const expectedOrigin = process.env.TGG_HUB_SITE_URL;
 
-          if git diff --cached --quiet; then
-            echo "Dependency lockfile and compiler configuration are current."
-          else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if (!fs.existsSync(outputDir)) {
+            throw new Error("Static export directory 'out' was not created.");
+          }
 
-            git commit -m "build: lock dependencies and pin Wrangler"
-            git push origin HEAD:refs/heads/revamp/tgg-hub-v2
-          fi
+          function walk(directory) {
+            return fs.readdirSync(directory, { withFileTypes: true })
+              .flatMap((entry) => {
+                const fullPath = path.join(directory, entry.name);
+                return entry.isDirectory() ? walk(fullPath) : [fullPath];
+              });
+          }
 
-      - name: Verify clean working tree
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git status --short
-            echo "Unexpected uncommitted changes remain."
-            exit 1
-          fi
+          const htmlFiles = walk(outputDir)
+            .filter((file) => file.endsWith(".html"))
+            .filter((file) => path.relative(outputDir, file)
+              .split(path.sep).join("/") !== "404.html");
+
+          if (htmlFiles.length === 0) {
+            throw new Error("No exported HTML pages were found.");
+          }
+
+          function getTag(html, tagName, attribute, value) {
+            return [...html.matchAll(new RegExp(`<${tagName}\\b[^>]*>`, "gi"))]
+              .map((match) => match[0])
+              .find((tag) => new RegExp(
+                `\\b${attribute}=["']${value}["']`, "i"
+              ).test(tag));
+          }
+
+          function getAttribute(tag, attribute) {
+            return tag?.match(new RegExp(
+              `\\b${attribute}=["']([^"']+)["']`, "i"
+            ))?.[1];
+          }
+
+          function normalizePath(value) {
+            return value.length > 1 ? value.replace(/\\/+$/, "") : "/";
+          }
+
+          for (const file of htmlFiles) {
+            const relativePath = path.relative(outputDir, file)
+              .split(path.sep).join("/");
+            const html = fs.readFileSync(file, "utf8");
+
+            const robotsTag = getTag(html, "meta", "name", "robots");
+            const robotsContent = getAttribute(robotsTag, "content") || "";
+            const directives = robotsContent.toLowerCase()
+              .split(",").map((item) => item.trim());
+
+            if (!directives.includes("noindex") ||
+                !directives.includes("nofollow")) {
+              throw new Error(
+                `Missing noindex/nofollow metadata: ${relativePath}`
+              );
+            }
+
+            const canonicalTag = getTag(html, "link", "rel", "canonical");
+            const canonicalHref = getAttribute(canonicalTag, "href");
+
+            if (!canonicalHref) {
+              throw new Error(`Missing canonical URL: ${relativePath}`);
+            }
+
+            const canonical = new URL(canonicalHref, expectedOrigin);
+            const withoutExtension = relativePath.replace(/\\.html$/, "");
+            const expectedPath = withoutExtension === "index"
+              ? "/"
+              : `/${withoutExtension.replace(/\\/index$/, "")}`;
+
+            if (canonical.origin !== expectedOrigin ||
+                normalizePath(canonical.pathname) !== normalizePath(expectedPath)) {
+              throw new Error(
+                `Unexpected canonical URL in ${relativePath}: ${canonical.href}`
+              );
+            }
+          }
+
+          const robotsFile = path.join(outputDir, "robots.txt");
+          const sitemapFile = path.join(outputDir, "sitemap.xml");
+
+          if (!fs.existsSync(robotsFile) || !fs.existsSync(sitemapFile)) {
+            throw new Error("Generated robots.txt or sitemap.xml is missing.");
+          }
+
+          const robotsText = fs.readFileSync(robotsFile, "utf8");
+          const sitemapText = fs.readFileSync(sitemapFile, "utf8");
+          const expectedSitemap = `${expectedOrigin}/sitemap.xml`;
+
+          if (!robotsText.includes(`Sitemap: ${expectedSitemap}`)) {
+            throw new Error("robots.txt points to the wrong sitemap URL.");
+          }
+
+          const locations = [...sitemapText.matchAll(/<loc>(.*?)<\\/loc>/g)]
+            .map((match) => match[1]);
+
+          if (locations.length === 0) {
+            throw new Error("The generated sitemap contains no URLs.");
+          }
+
+          for (const location of locations) {
+            if (new URL(location).origin !== expectedOrigin) {
+              throw new Error(`Sitemap contains an unexpected URL: ${location}`);
+            }
+          }
+
+          console.log(
+            `Verified noindex/nofollow and canonical URLs for ${htmlFiles.length} pages.`
+          );
+          console.log(`Verified robots.txt and ${locations.length} sitemap URLs.`);
+          NODE
 
       - name: Deploy Cloudflare Pages preview
         uses: cloudflare/wrangler-action@v4
