@@ -7,16 +7,20 @@ export const dynamic = "force-static";
 const staticRoutes = [
   "",
   "/ecosystem",
+  "/web3",
+  "/services",
   "/about",
   "/contact"
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
-    url: `${SITE_URL}${route}`,
-    changeFrequency: "monthly",
-    priority: route === "" ? 1 : 0.7
-  }));
+  const pages: MetadataRoute.Sitemap = staticRoutes.map(
+    (route) => ({
+      url: `${SITE_URL}${route}`,
+      changeFrequency: "monthly",
+      priority: route === "" ? 1 : 0.7
+    })
+  );
 
   const projectPages: MetadataRoute.Sitemap = PROJECTS
     .filter((project) => project.detail)
