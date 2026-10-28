@@ -1,3 +1,8 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+
 const navigation = [
   { href: "/ecosystem", label: "Ecosystem" },
   { href: "/web3", label: "Web3" },
@@ -7,9 +12,11 @@ const navigation = [
 ];
 
 function NavigationLinks({
-  mobile = false
+  mobile = false,
+  pathname
 }: {
   mobile?: boolean;
+  pathname: string;
 }) {
   return (
     <>
@@ -22,6 +29,9 @@ function NavigationLinks({
           }
           href={item.href}
           key={item.href}
+          aria-current={
+            pathname === item.href ? "page" : undefined
+          }
         >
           {item.label}
         </a>
@@ -31,6 +41,8 @@ function NavigationLinks({
 }
 
 export function SiteHeader() {
+  const pathname = usePathname() ?? "/";
+
   return (
     <header className="site-header">
       <div className="container site-header__inner">
@@ -38,6 +50,7 @@ export function SiteHeader() {
           className="wordmark"
           href="/"
           aria-label="TGG HUB home"
+          aria-current={pathname === "/" ? "page" : undefined}
         >
           <span className="wordmark__name">TGG</span>
           <span className="wordmark__suffix">HUB</span>
@@ -47,29 +60,36 @@ export function SiteHeader() {
           className="desktop-navigation"
           aria-label="Primary navigation"
         >
-          <NavigationLinks />
+          <NavigationLinks pathname={pathname} />
         </nav>
 
-        <details className="mobile-navigation">
-          <summary aria-label="Open navigation menu">
-            <span>Menu</span>
-            <span
-              className="mobile-navigation__icon"
-              aria-hidden="true"
-            >
-              <span />
-              <span />
-            </span>
-          </summary>
+        <div className="site-header__actions">
+          <ThemeSwitcher />
 
-          <nav
-            className="mobile-navigation__panel"
-            aria-label="Mobile navigation"
-          >
-            <NavigationLinks mobile />
-          </nav>
-        </details>
+          <details className="mobile-navigation">
+            <summary aria-label="Toggle primary navigation">
+              <span>Menu</span>
+              <span
+                className="mobile-navigation__icon"
+                aria-hidden="true"
+              >
+                <span />
+                <span />
+              </span>
+            </summary>
+
+            <nav
+              className="mobile-navigation__panel"
+              aria-label="Mobile navigation"
+            >
+              <NavigationLinks
+                mobile
+                pathname={pathname}
+              />
+            </nav>
+          </details>
+        </div>
       </div>
     </header>
   );
-}
+}feat(theme): add theme switcher and active navigation
