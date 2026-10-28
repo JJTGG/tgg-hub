@@ -1,8 +1,10 @@
-
 import type { Metadata } from "next";
 import { ProjectCard } from "@/components/project-card";
 import { PROJECTS } from "@/data/projects";
-import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
+import {
+  SITE_DESCRIPTION,
+  SITE_URL
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Different projects. Shared direction.",
@@ -17,7 +19,9 @@ export const metadata: Metadata = {
   }
 };
 
-const featuredProjects = PROJECTS.filter((project) => project.featured);
+const featuredProjects = PROJECTS.filter(
+  (project) => project.featured
+);
 
 export default function HomePage() {
   return (
@@ -25,7 +29,9 @@ export default function HomePage() {
       <section className="home-hero">
         <div className="container home-hero__grid">
           <div className="home-hero__content">
-            <p className="eyebrow">An evolving ecosystem</p>
+            <p className="eyebrow">
+              An evolving technology ecosystem
+            </p>
 
             <h1>
               Different projects.
@@ -33,32 +39,60 @@ export default function HomePage() {
             </h1>
 
             <p className="home-hero__description">
-              TGG HUB brings independent products, tools and experiments
-              together without taking away what makes each one distinct.
+              TGG HUB connects independent products, tools and
+              experiments across Web3 and wider technology, without
+              forcing them into one product or codebase.
             </p>
 
             <div className="button-row">
-              <a className="button button--primary" href="/ecosystem">
-                Explore the ecosystem <span aria-hidden="true">↗</span>
+              <a
+                className="button button--primary"
+                href="/ecosystem"
+              >
+                Explore the ecosystem{" "}
+                <span aria-hidden="true">↗</span>
               </a>
-              <a className="button button--secondary" href="/about">
-                About TGG HUB
+            </div>
+
+            <div
+              className="home-path-links"
+              aria-label="Other ways to explore TGG HUB"
+            >
+              <a href="/web3">
+                Explore our Web3 roots{" "}
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a href="/services">
+                Work with TGG HUB{" "}
+                <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
 
-          <aside className="home-hero__rail" aria-label="TGG HUB principles">
+          <aside
+            className="home-hero__rail"
+            aria-label="How the ecosystem works"
+          >
             <div className="hero-rail-item">
               <span>01 / INDEPENDENCE</span>
-              <p>Products retain their own identity and direction.</p>
+              <p>
+                Projects retain their own purpose, technology and
+                lifecycle.
+              </p>
             </div>
             <div className="hero-rail-item">
-              <span>02 / UTILITY</span>
-              <p>Build things that provide meaningful value.</p>
+              <span>02 / USEFUL WORK</span>
+              <p>
+                Products and experiments should have a clear reason
+                to exist.
+              </p>
             </div>
             <div className="hero-rail-item">
-              <span>03 / EVOLUTION</span>
-              <p>Make room for new ideas without merging every project.</p>
+              <span>03 / ROOM TO EVOLVE</span>
+              <p>
+                The ecosystem can grow without making everything
+                one thing.
+              </p>
             </div>
           </aside>
         </div>
@@ -69,10 +103,12 @@ export default function HomePage() {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Selected projects</p>
-              <h2>Work worth exploring.</h2>
+              <h2>Explore the work.</h2>
             </div>
+
             <a className="text-link" href="/ecosystem">
-              View the ecosystem <span aria-hidden="true">↗</span>
+              View all projects{" "}
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
 
@@ -88,55 +124,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="principles-section">
-        <div className="container">
-          <div className="principles-section__intro">
-            <p className="eyebrow">The approach</p>
-            <h2>A shared ecosystem, not a single application.</h2>
-            <p>
-              Projects can use different technologies, maintain separate
-              repositories and evolve at different speeds. The hub connects
-              the ecosystem without forcing every project into the same
-              architecture or identity.
-            </p>
+      <section className="editorial-section editorial-section--bordered home-origin">
+        <div className="container editorial-layout">
+          <div className="editorial-heading">
+            <p className="eyebrow">The roots</p>
+            <h2>
+              Built from community. Growing across technology.
+            </h2>
           </div>
 
-          <div className="principle-grid">
-            <article>
-              <span>01</span>
-              <h3>Independence</h3>
-              <p>
-                Each product keeps its own purpose, interface and lifecycle.
-              </p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Utility</h3>
-              <p>
-                Products should solve real problems or create useful
-                experiences.
-              </p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Evolution</h3>
-              <p>
-                The ecosystem can grow by adding meaningful projects rather
-                than combining everything into one codebase.
-              </p>
-            </article>
+          <div className="editorial-copy">
+            <p>
+              TGG HUB began with Web3 community activity, insights,
+              personal growth and genuine connections. The ecosystem
+              has since expanded into independent products, technical
+              experiments and digital solutions.
+            </p>
+            <p>
+              Web3 remains part of the story—not the boundary of
+              what TGG HUB can build or explore.
+            </p>
+            <a className="text-link" href="/web3">
+              Read the Web3 story{" "}
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="closing-section">
-        <div className="container closing-section__inner">
+      <section className="home-services-strip">
+        <div className="container home-services-strip__inner">
           <div>
-            <p className="eyebrow">Explore what's being built</p>
-            <h2>Many directions. One ecosystem.</h2>
+            <p className="eyebrow">Digital services</p>
+            <h2>Have something worth building?</h2>
+            <p>
+              Explore website development and digital solutions
+              with scope agreed before work begins.
+            </p>
           </div>
-          <a className="button button--on-blue" href="/ecosystem">
-            Browse projects <span aria-hidden="true">↗</span>
+
+          <a
+            className="button button--secondary"
+            href="/services"
+          >
+            Explore services{" "}
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </section>
